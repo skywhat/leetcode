@@ -14,7 +14,7 @@ class Solution{
 				}
 				//not a traditional binary search tree
 				//https://en.wikipedia.org/wiki/Binary_search_algorithm
-				nums[i]=right;
+				res[i]=right;
 				fake_bst.insert(fake_bst.begin()+right,nums[i]);
 			}
 			return res;
