@@ -7,7 +7,7 @@ class Solution{
 				int left=0,right=fake_bst.size();
 				while(left<right){
 					int mid=(left+right)/2;
-					if(nums[mid]>fake_bst[mid])
+					if(nums[i]>fake_bst[mid])
 						left=mid+1;
 					else
 						right=mid;
