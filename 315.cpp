@@ -19,4 +19,4 @@ class Solution{
 			}
 			return res;
 		}
-}
+};
