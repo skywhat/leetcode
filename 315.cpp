@@ -8,9 +8,9 @@ class Solution{
 				while(left<right){
 					int mid=(left+right)/2;
 					if(nums[mid]>fake_bst[mid])
-						mid=left+1;
+						left=mid+1;
 					else
-						mid=right;
+						right=mid;
 				}
 				//not a traditional binary search tree
 				//https://en.wikipedia.org/wiki/Binary_search_algorithm
