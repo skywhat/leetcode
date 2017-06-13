@@ -14,7 +14,7 @@ struct TreeNode {
 	TreeNode(int x) :val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
+class TreeEnv {
 public:
 	//输入vector<int> 树层序遍历的节点，NULL空节点以NULL_TREENODE表示
 	//返回TreeNode* 根节点
@@ -76,8 +76,8 @@ public:
 
 int main() {
 	vector<int> treeList = {1,2,5,3,4,INT_MIN,6};
-	Solution s;
-	TreeNode* root = s.initialTree(treeList);
+	TreeEnv t;
+	TreeNode* root = t.initialTree(treeList);
 	s.displayTree(root);
 
 	return 0;
