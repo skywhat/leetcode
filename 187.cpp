@@ -22,9 +22,32 @@ public:
 	}
 };
 
+class Solution_1{
+public:
+	vector<string> findRepeatedDnaSequences(string s){
+		vector<string> res;
+		int len=s.size();
+		if(len<10)
+			return res;
+		int hashKey=0;
+		int keyMap[1<<20];
+		for(int i=0;i<9;++i){
+			hashKey=(hashKey<<2)|(s[i]-'A'+1)%5;
+		}
+		for(int i=9;i<len;++i){
+			hashKey=((hashKey<<2)|(s[i]-'A'+1)%5)&0xfffff;
+			keyMap[hashKey]++;
+			if(keyMap[hashKey]==2)
+				res.push_back(s.substr(i-9,10));
+		}
+		return res;
+
+	}
+};
+
 int main(){
-	string s="AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT";	
-	Solution solution;
+	string s="AAAAAAAAAAAAA";	
+	Solution_1 solution;
 	vector<string> res=solution.findRepeatedDnaSequences(s);
 
 	copy(res.begin(),res.end(),ostream_iterator<string>(cout,", "));
