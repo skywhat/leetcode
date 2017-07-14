@@ -28,42 +28,69 @@ struct TreeNode{
 class Solution {
 public:
 	int closestValue(TreeNode* root, double target) {
-		if (!root->left && !root->right)
-			return root->val;
-		double distance = abs(root->val-target);
-		double left_distance = root->left ? abs(root->left->val - target) : INT_MAX;
-		double right_distance = root->right? abs(root->right->val-target):INT_MAX;
-		if (distance < left_distance&&distance < right_distance)
-			return root->val;
-		else if (left_distance < right_distance)
-			return closestValue(root->left, target);
-		else
-			return closestValue(root->right, target);
+		double dist = abs(root->val - target);
+		int result = root->val;
+		closestValue(root, target, result, dist);
+		return result;
+
 	}
+	void closestValue(TreeNode* root, const double& target, int &result, double &dist) {
+		if (root && root->left == nullptr && root->right == nullptr) {
+			return;
+		}
+		double leftDist = root->left != nullptr ? abs(root->left->val - target) : INT_MAX;
+		double rightDist = root->right != nullptr ? abs(root->right->val - target) : INT_MAX;
+		if (leftDist < rightDist) {
+			if (dist > leftDist) {
+				result = root->left->val;
+				dist = leftDist;
+			}
+			closestValue(root->left, target, result, dist);
+		}
+		else {
+			if (dist > rightDist) {
+				result = root->right->val;
+				dist = rightDist;
+			}
+			closestValue(root->right, target, result, dist);
+		}
+	}
+
 };
 
 class TreeEnv {
 public:
-	//Convert an array where elements are sorted in ascending order to binary search tree
-	TreeNode* initialBinarySearchTree(const vector<int>& treeList) {
+	TreeNode* initialTree(const vector<int>& treeList) {
+		queue<TreeNode*> q;
+		TreeNode* root;
 		if (!treeList.empty()) {
-			return initialBinarySearchTree(treeList, 0, treeList.size() - 1);
+			root = new TreeNode(treeList[0]);
+			q.push(root);
 		}
 		else
 			return NULL;
-	}
-	TreeNode* initialBinarySearchTree(const vector<int>& treeList,int left,int right) {
-		if (left > right)
-			return NULL;
-		if (left == right) {
-			return new TreeNode(treeList[left]);
+		int index = 1;
+		while (!q.empty()) {
+			TreeNode* tmp = q.front();
+			q.pop();
+			if (index < treeList.size()) {
+				if (treeList[index] != NULL_TREENODE) {
+					tmp->left = new TreeNode(treeList[index]);
+					q.push(tmp->left);
+				}
+				index++;
+			}
+			if (index < treeList.size()) {
+				if (treeList[index] != NULL_TREENODE) {
+					tmp->right = new TreeNode(treeList[index]);
+					q.push(tmp->right);
+				}
+				index++;
+			}
 		}
-		int mid = (left + right) / 2;
-		TreeNode* root = new TreeNode(treeList[mid]);
-		root->left = initialBinarySearchTree(treeList,left,mid-1);
-		root->right = initialBinarySearchTree(treeList,mid+1,right);
 		return root;
 	}
+
 
 	void displayTree(TreeNode* root) {
 		queue<TreeNode*> q;
@@ -91,12 +118,13 @@ public:
 };
 
 int main() {
-	double target = 2.1;
-	vector<int> treeListBST = {1,2,3,4,5,6,7};
+	double target = 0.4;
+	vector<int> treeListBST = {3,1,5,0,2};
 	Solution s;
 	TreeEnv t;
-	TreeNode* rootBST = t.initialBinarySearchTree(treeListBST);
-	t.displayTree(rootBST);
-	cout << s.closestValue(rootBST, target) << endl;
+
+	TreeNode* root = t.initialTree(treeListBST);
+	t.displayTree(root);
+	cout << s.closestValue(root, target) << endl;
 	return 0;
 }
