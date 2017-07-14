@@ -28,25 +28,11 @@ struct TreeNode{
 class Solution {
 public:
 	int closestValue(TreeNode* root, double target) {
-<<<<<<< HEAD
 		double dist = abs(root->val - target);
 		int result = root->val;
 		closestValue(root, target, result, dist);
 		return result;
 
-=======
-		if (root&&!root->left && !root->right)
-			return root->val;
-		double distance = abs(root->val-target);
-		double left_distance = root->left ? abs(root->left->val - target) : INT_MAX;
-		double right_distance = root->right? abs(root->right->val-target):INT_MAX;
-		if (distance < left_distance&&distance < right_distance)
-			return root->val;
-		else if (left_distance < right_distance)
-			return closestValue(root->left, target);
-		else
-			return closestValue(root->right, target);
->>>>>>> origin/master
 	}
 	void closestValue(TreeNode* root, const double& target, int &result, double &dist) {
 		if (root && root->left == nullptr && root->right == nullptr) {
