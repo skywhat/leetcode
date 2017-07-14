@@ -28,7 +28,7 @@ struct TreeNode{
 class Solution {
 public:
 	int closestValue(TreeNode* root, double target) {
-		if (!root->left && !root->right)
+		if (root&&!root->left && !root->right)
 			return root->val;
 		double distance = abs(root->val-target);
 		double left_distance = root->left ? abs(root->left->val - target) : INT_MAX;
