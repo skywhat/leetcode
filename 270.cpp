@@ -1,54 +1,49 @@
+/*
+Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+
+Note: 
+Given target value is a floating point. 
+You are guaranteed to have only one unique value in the BST that is closest to the target.
+
+*/
+
 #include<iostream>
 #include<vector>
+#include<algorithm>
 #include<iterator>
+#include<string>
 #include<queue>
+
 using namespace std;
 
-// NULL节点标示
 #define NULL_TREENODE INT_MIN
 
-struct TreeNode {
+struct TreeNode{
 	int val;
 	TreeNode *left;
 	TreeNode *right;
 	TreeNode(int x) :val(x), left(NULL), right(NULL) {}
 };
 
+class Solution {
+public:
+	int closestValue(TreeNode* root, double target) {
+		if (!root->left && !root->right)
+			return root->val;
+		double distance = abs(root->val-target);
+		double left_distance = root->left ? abs(root->left->val - target) : INT_MAX;
+		double right_distance = root->right? abs(root->right->val-target):INT_MAX;
+		if (distance < left_distance&&distance < right_distance)
+			return root->val;
+		else if (left_distance < right_distance)
+			return closestValue(root->left, target);
+		else
+			return closestValue(root->right, target);
+	}
+};
+
 class TreeEnv {
 public:
-	//输入vector<int> 树层序遍历的节点，NULL空节点以NULL_TREENODE表示
-	//返回TreeNode* 根节点
-	TreeNode* initialTree(const vector<int>& treeList) {
-		queue<TreeNode*> q;
-		TreeNode* root;
-		if (!treeList.empty()) {
-			root = new TreeNode(treeList[0]);
-			q.push(root);
-		}
-		else
-			return NULL;
-		int index = 1;
-		while (!q.empty()) {
-			TreeNode* tmp = q.front();
-			q.pop();
-			if (index < treeList.size()) {
-				if (treeList[index] != NULL_TREENODE) {
-					tmp->left = new TreeNode(treeList[index]);
-					q.push(tmp->left);
-				}
-				index++;
-			}
-			if (index < treeList.size()) {
-				if (treeList[index] != NULL_TREENODE) {
-					tmp->right = new TreeNode(treeList[index]);
-					q.push(tmp->right);
-				}
-				index++;
-			}
-		}
-		return root;
-	}
-
 	//Convert an array where elements are sorted in ascending order to binary search tree
 	TreeNode* initialBinarySearchTree(const vector<int>& treeList) {
 		if (!treeList.empty()) {
@@ -70,7 +65,6 @@ public:
 		return root;
 	}
 
-	//层序遍历方式输出树root，无法显示出父子节点的关系，有待改进
 	void displayTree(TreeNode* root) {
 		queue<TreeNode*> q;
 		if (root) {
@@ -97,10 +91,12 @@ public:
 };
 
 int main() {
-	vector<int> treeList = {1,2,5,3,4,INT_MIN,6};
+	double target = 2.1;
+	vector<int> treeListBST = {1,2,3,4,5,6,7};
+	Solution s;
 	TreeEnv t;
-	TreeNode* root = t.initialTree(treeList);
-	s.displayTree(root);
-
+	TreeNode* rootBST = t.initialBinarySearchTree(treeListBST);
+	t.displayTree(rootBST);
+	cout << s.closestValue(rootBST, target) << endl;
 	return 0;
 }
