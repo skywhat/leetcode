@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<iterator>
 #include<queue>
 using namespace std;
 
@@ -57,7 +56,7 @@ public:
 		else
 			return NULL;
 	}
-	TreeNode* initialBinarySearchTree(const vector<int>& treeList,int left,int right) {
+	TreeNode* initialBinarySearchTree(const vector<int>& treeList, int left, int right) {
 		if (left > right)
 			return NULL;
 		if (left == right) {
@@ -65,8 +64,8 @@ public:
 		}
 		int mid = (left + right) / 2;
 		TreeNode* root = new TreeNode(treeList[mid]);
-		root->left = initialBinarySearchTree(treeList,left,mid-1);
-		root->right = initialBinarySearchTree(treeList,mid+1,right);
+		root->left = initialBinarySearchTree(treeList, left, mid - 1);
+		root->right = initialBinarySearchTree(treeList, mid + 1, right);
 		return root;
 	}
 
@@ -95,12 +94,3 @@ public:
 		}
 	}
 };
-
-int main() {
-	vector<int> treeList = {1,2,5,3,4,INT_MIN,6};
-	TreeEnv t;
-	TreeNode* root = t.initialTree(treeList);
-	s.displayTree(root);
-
-	return 0;
-}
