@@ -25,6 +25,7 @@ struct TreeNode{
 	TreeNode(int x) :val(x), left(NULL), right(NULL) {}
 };
 
+
 class Solution {
 public:
 	int closestValue(TreeNode* root, double target) {
@@ -38,8 +39,8 @@ public:
 		if (!root||(root && root->left == nullptr && root->right == nullptr)) {
 			return;
 		}
-		double leftDist = root->left != nullptr ? abs(root->left->val - target) : INT_MAX;
-		double rightDist = root->right != nullptr ? abs(root->right->val - target) : INT_MAX;
+		double leftDist = root->left != nullptr ? abs(root->left->val - target) : numeric_limits<double>::max();
+		double rightDist = root->right != nullptr ? abs(root->right->val - target) : numeric_limits<double>::max();
 		if (leftDist < rightDist) {
 			if (dist > leftDist) {
 				result = root->left->val;
@@ -55,7 +56,6 @@ public:
 			closestValue(root->right, target, result, dist);
 		}
 	}
-
 };
 
 class TreeEnv {
