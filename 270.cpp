@@ -35,7 +35,7 @@ public:
 
 	}
 	void closestValue(TreeNode* root, const double& target, int &result, double &dist) {
-		if (root && root->left == nullptr && root->right == nullptr) {
+		if (!root||(root && root->left == nullptr && root->right == nullptr)) {
 			return;
 		}
 		double leftDist = root->left != nullptr ? abs(root->left->val - target) : INT_MAX;
@@ -118,8 +118,8 @@ public:
 };
 
 int main() {
-	double target = 0.4;
-	vector<int> treeListBST = {3,1,5,0,2};
+	double target =-1500;
+	vector<int> treeListBST = {1500,1400};
 	Solution s;
 	TreeEnv t;
 
