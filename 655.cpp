@@ -1,6 +1,5 @@
 #include<iostream>
 #include<vector>
-#include<algorithm>
 #include<string>
 #include<queue>
 #include "Tree.h"
@@ -10,7 +9,6 @@ using namespace std;
 class Solution{
 public:
     vector<vector<string>> printTree(TreeNode *root){
-        
         int depth=0;
         queue<TreeNode*> q;
         if(root)
@@ -56,7 +54,6 @@ public:
             }
             level++;
         }
-        
         return res;
     }
 };
@@ -75,7 +72,6 @@ int main(){
         }
         cout<<endl;
     }
-    t.displayTree(root);
     
     return 0;
 }
