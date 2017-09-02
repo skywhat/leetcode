@@ -28,3 +28,35 @@ int main(){
 
 	return 0;
 }
+/*
+ *        d     v     d     f
+ *  -1    0     1     2     3
+ *
+ *  start i
+ *
+ *
+ *        d     v     d     f
+ *  -1    0     1     2     3
+ *
+ *  start       i
+ *
+ *
+ *        d     v     d     f
+ *  -1    0     1     2     3
+ *
+ *  start             i
+ *(when d appear again, start should be in previous d position.)
+ *
+ *
+ *        d     v     d     f
+ *  -1    0     1     2     3
+ *
+ *      start         i
+ *
+ *
+ *        d     v     d     f
+ *  -1    0     1     2     3
+ *
+ *       start              i
+ */
+
