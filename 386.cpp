@@ -29,9 +29,32 @@ public:
 	}
 };
 
+class Solution1{
+public:
+	vector<int> lexicalOrder(int n){
+		vector<int> res(n,0);
+		int curr=1;
+		for(int i=0;i<res.size();++i){
+			res[i]=curr;
+			if(curr*10<=n){
+				curr*=10;
+			}
+			else{
+				if(curr>=n){
+					curr/=10;
+				}
+				curr++;
+				while(curr%10==0)
+					curr/=10;
+			}
+		}
+		return res;
+	}
+};
+
 int main(){
-	Solution s;
-	int n=13;
+	Solution1 s;
+	int n=192;
 	vector<int> test=s.lexicalOrder(n);
 	for(auto t:test){
 		cout<<t<<endl;
