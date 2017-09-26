@@ -93,4 +93,32 @@ public:
 			cout << endl;
 		}
 	}
+	
+	void inOrder(TreeNode* root){
+		if(root){
+			inOrder(root->left);
+			cout<<root->val<<", ";
+			inOrder(root->right);
+		}	
+	}
+
+	void preOrder(TreeNode* root){
+		if(root){
+			cout<<root->val<<", ";
+			preOrder(root->left);
+			preOrder(root->right);
+		}
+	}
+
+	void postOrder(TreeNode* root){
+		if(root){
+			postOrder(root->left);
+			postOrder(root->right);
+			cout<<root->val<<", ";
+		}
+	}
+
 };
+
+
+
