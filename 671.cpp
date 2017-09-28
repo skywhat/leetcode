@@ -16,12 +16,11 @@ public:
 		if(root){
 			inorder(root->left,Min,secondMin);
 			if(root->val<Min){
-                secondMin=Min;
+            	secondMin=Min;
 				Min=root->val;
 			}
-            else if(root->val>Min&&root->val<secondMin){
+            else if(root->val>Min&&root->val<secondMin)
                 secondMin=root->val;
-            }
 			inorder(root->right,Min,secondMin);
 		}
 	}
