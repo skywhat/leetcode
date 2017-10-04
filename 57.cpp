@@ -59,6 +59,29 @@ public:
 	}
 };
 
+class Solution2 {
+public:
+    vector<Interval> insert(vector<Interval>& intervals, Interval newInterval) {
+        vector<Interval> res;
+        int i=0;
+        while(i<intervals.size()&&intervals[i].end<newInterval.start){
+            res.push_back(intervals[i]);
+            i++;
+        }
+        while(i<intervals.size()&&intervals[i].start<=newInterval.end){
+            newInterval.start=min(intervals[i].start,newInterval.start);
+            newInterval.end=max(intervals[i].end,newInterval.end);
+            i++;
+        }
+        res.push_back(newInterval);
+        while(i<intervals.size()){
+            res.push_back(intervals[i]);
+            i++;
+        }
+        return res;
+    }
+};
+
 
 int main() {
 	Solution s;
