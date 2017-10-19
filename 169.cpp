@@ -33,6 +33,7 @@ public:
 			if(++m[n]>limit)
 				return n;
 		}
+        return -1;
 	}
 };
 	
