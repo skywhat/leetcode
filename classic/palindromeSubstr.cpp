@@ -20,28 +20,20 @@ using namespace std;
 class Solution{
 public:
 	vector<string> alltypes(string s){
+		unordered_set<string> res;
 		int len=s.size();
 		vector<vector<bool>> dp(len,vector<bool>(len,false));
-		for(int i=0;i<len;++i){
-			dp[i][i]=true;
-		}
 		for(int j=0;j<len;++j){
-			for(int i=0;i<j;++i){
+			for(int i=0;i<=j;++i){
 				int left=i+1;
 				int right=j-1;
 				if(left>=right)
 					dp[i][j]=s[i]==s[j];
 				else
 					dp[i][j]=dp[left][right]&&(s[i]==s[j]);
-			}		
-		}
-		set<string> res;
-		for(int i=0;i<len;++i){
-			for(int j=i;j<len;++j){
-				if(dp[i][j]){
+				if(dp[i][j])
 					res.insert(s.substr(i,j-i+1));
-				}
-			}
+			}		
 		}
 		return vector<string>(res.begin(),res.end());	
 	}
@@ -63,7 +55,7 @@ public:
  */
 
 int main(){
-	string test="abaaa";
+	string test="abacd";
 	Solution s;
 	vector<string> res=s.alltypes(test);
    	for(auto r:res)
