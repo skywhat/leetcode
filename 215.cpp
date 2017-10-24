@@ -75,6 +75,41 @@ public:
     }
 };
 
+class Solution5 {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int len=nums.size();
+        int i=0,j=len-1;
+        while(i<=j){
+            int pt=partition(nums,i,j);
+            if(pt==len-k)
+                return nums[pt];
+            else if(pt>len-k)
+                j=pt-1;
+            else
+                i=pt+1;
+        }
+        return -1;
+    }
+    //standard quick select
+    int partition(vector<int>& nums,int i,int j){
+        int val=nums[i];
+        int l=i+1;
+        int r=j;
+        while(l<=r){
+            if(nums[l]>val&&nums[r]<val)
+                swap(nums[l++],nums[r--]);
+            if(nums[l]<=val)
+                l++;
+            if(nums[r]>=val)
+                r--;
+        }
+        swap(nums[i],nums[r]);
+        return r;
+    }
+};
+
+
 int main(){
 	vector<int> test={3,2,1,5,6,4};
 	int k=2;
