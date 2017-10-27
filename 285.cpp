@@ -4,7 +4,7 @@
 
 using namespace std;
 
-//recursive
+//recursive O(lgn)
 class Solution {
 public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
@@ -39,7 +39,7 @@ public:
     }
 };
 
-//iterative O(n)
+//iterative O(n) if the tree is not a binary search one.
 class Solution3 {
 public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
@@ -68,6 +68,29 @@ public:
             
         }
         return successor;
+    }
+};
+
+//recursive O(n) if the tree is not a binary search one.
+class Solution4 {
+public:
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        vector<TreeNode*> help={nullptr,nullptr};
+        TreeNode* res=nullptr;
+        inorder(root,help,res,p);
+        return res;
+    }
+    void inorder(TreeNode* root,vector<TreeNode*>& help,TreeNode*& res,TreeNode* p){
+        if(root){
+            inorder(root->right,help,res,p);
+            help[0]=help[1];
+            help[1]=root;
+            if(help[1]==p){
+                res=help[0];
+                return;
+            }
+            inorder(root->left,help,res,p);
+        }
     }
 };
 
