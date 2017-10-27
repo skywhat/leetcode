@@ -25,6 +25,8 @@ word = "ABCB", -> returns false.
 #include<iostream>
 #include<vector>
 #include<string>
+#include<set>
+
 
 using namespace std;
 
@@ -62,8 +64,43 @@ public:
 	}
 };
 
+class Solution2 {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        bool res=false;
+        int m=board.size();
+        int n=board[0].size();
+        set<pair<int,int>> help;
+        for(int i=0;i<m;++i){
+            for(int j=0;j<n;++j){
+                if(board[i][j]==word[0]){
+                    if(find(board,word,0,i,j,m,n,help))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+    bool find(vector<vector<char>>& board,const string& word,int pos,int x,int y,const int& m,const int& n,set<pair<int,int>>& s){
+        if(pos+1==word.size()){
+            return word[pos]==board[x][y]&&!s.count({x,y});
+        }
+        if(board[x][y]!=word[pos]||s.count({x,y}))
+            return false;
+        s.insert({x,y});
+        if(
+           (x+1<m&&find(board,word,pos+1,x+1,y,m,n,s))||
+           (x-1>=0&&find(board,word,pos+1,x-1,y,m,n,s))||
+           (y+1<n&&find(board,word,pos+1,x,y+1,m,n,s))||
+           (y-1>=0&&find(board,word,pos+1,x,y-1,m,n,s))
+           )return true;
+        s.erase({x,y});
+        return false;
+    }
+};
+
 int main() {
-	Solution s;
+	Solution2 s;
 	vector<vector<char>> t = { {'h','e','l','l','o'} };
 	/*
 	vector<vector<char>> v = {
