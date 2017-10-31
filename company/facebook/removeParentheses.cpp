@@ -26,6 +26,10 @@ public:
 				}
 			}
 		}
+		/*
+		 you can also use set to store the left and right stack position.
+		 check is it exists when you construct a new valid parentheses
+		 */
 		while(!left.empty()){
 			s[left.top()]='*';
 			left.pop();
