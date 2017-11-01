@@ -58,3 +58,18 @@ int main(){
     
     return 0;
 }
+
+
+/*
+ *follow up:
+ *three sum, which allows duplicates and each number could be used.
+ *change two code snippet
+ *1. start=i
+ *2. start<=end
+ *
+ *follow up 2:
+ *the array cannot be sorted
+ *convert it to two sum problem.
+ *
+ *
+ */
