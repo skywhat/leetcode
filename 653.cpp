@@ -4,6 +4,7 @@
 #include<unordered_set>
 #include "Tree.h"
 
+//Time Complexity O(n)  Space Complexity O(n)
 class Solution{
 public:
     bool findTarget(TreeNode* root,int k){
@@ -22,6 +23,7 @@ public:
 	}
 };
 
+//Time Complexity O(n)  Space Complexity O(n)
 class Solution1{
 public:
 	bool findTarget(TreeNode* root,int k){
@@ -46,6 +48,30 @@ public:
 
 };
 
+//Time Complexity O(nlgn)  Space Complexity O(h)  h is the height of the tree, which is lgn at best case, n at worst case
+class Solution2 {
+public:
+    bool findTarget(TreeNode* root, int k) {
+        return dfs(root,root,k);
+    }
+    bool dfs(TreeNode* root,TreeNode* cur,int k){
+        if(!cur)
+            return false;
+        return search(root,cur,k-cur->val)||dfs(root,cur->left,k)||dfs(root,cur->right,k);
+    }
+    bool search(TreeNode* root,TreeNode* cur,int val){
+        if(!root)
+            return false;
+        if(!cur)
+            return false;
+        if(root->val==val&&cur!=root)
+            return true;
+        if(root->val<val)
+            return search(root->right,cur,val);
+        else
+            return search(root->left,cur,val);
+    }
+};
 
 int main(){
     TreeEnv t;
