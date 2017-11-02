@@ -31,6 +31,36 @@ public:
 	}
 };
 
+
+
+class Solution2 {
+public:
+    bool checkSubarraySum(vector<int>& nums, int k) {
+        if(nums.size()<2)
+            return false;
+        if(k==0){
+            for(int i=1;i<nums.size();++i){
+                if(nums[i]==0&&nums[i-1]==0)
+                    return true;
+            }
+            return false;
+        }
+        unordered_set<int> m;
+        m.insert(0);
+        int sum=0;
+        for(int i=0;i<nums.size();++i){
+            sum+=nums[i];
+            if(m.count(sum%k)&&i>0)
+                return true;
+            else
+                m.insert(sum%k);
+        }
+        return false;
+    }
+};
+//Your runtime beats 95.83 % of cpp submissions.
+
+
 int main(){
 	vector<int> test={23,2,4,6,7};
 	int k=-6;
