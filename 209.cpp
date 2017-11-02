@@ -23,6 +23,24 @@ public:
 	}
 };
 
+//easy to understand
+class Solution2 {
+public:
+    int minSubArrayLen(int s, vector<int>& nums) {
+        int sum=0;
+        int minLen=INT_MAX;
+        for(int i=0,j=-1;i<nums.size();++i){
+            sum+=nums[i];
+            while(sum>=s){
+                minLen=min(minLen,i-j);
+                j++;
+                sum-=nums[j];
+            }
+        }
+        return minLen==INT_MAX?0:minLen;
+    }
+};
+
 int main(){
 	vector<int> arr={2,3,1,2,4,3};
 	int len=7;
