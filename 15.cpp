@@ -63,9 +63,11 @@ int main(){
 /*
  *follow up:
  *three sum, which allows duplicates and each number could be used.
- *change two code snippet
- *1. start=i
- *2. start<=end
+ *change three code snippet
+ *
+ * 1. i<nums.size()
+ * 2. start=i
+ * 3. start<=end
  *
  *follow up 2:
  *the array cannot be sorted
