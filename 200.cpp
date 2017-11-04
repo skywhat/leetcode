@@ -31,3 +31,16 @@ public:
             flipToZero(grid,m,n,i,j-1);
     }
 };
+
+/*
+ example:
+ 
+ 0 1 0
+ 1 0 1
+ 0 1 0
+ 
+ For the central 0, it could be visited at most five times
+ Thus the time complexity of DFS solution would be O(n)
+ */
+
+
