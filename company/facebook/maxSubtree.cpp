@@ -10,11 +10,17 @@ public:
 	int maxSubtree(TreeNode* root){
 		if(!root)
 			return 0;
-		if(!root->left&&!root->right)
-			return root->val;
-		int left=maxSubtree(root->left);
-		int right=maxSubtree(root->right);
-		return max(root->val+left+right,max(left,right));	
+		int maxSubsum=INT_MIN;
+		dfs(root,maxSubsum);
+		return maxSubsum;
+	}
+	int dfs(TreeNode* root,int& maxSubsum){
+		if(!root)
+			return 0;
+		int left=dfs(root->left,maxSubsum);
+		int right=dfs(root->right,maxSubsum);
+		maxSubsum=max(maxSubsum,left+right+root->val);
+		return left+right+root->val;
 	}
 };
 
@@ -30,7 +36,7 @@ public:
  */
 
 int main(){
-	vector<int> l={1,2,3,NULL_TREENODE,NULL_TREENODE,7,-6};
+	vector<int> l={1,2,3,NULL_TREENODE,NULL_TREENODE,-5,-6};
 	TreeEnv t;
 	TreeNode* root=t.initialTree(l);
 
