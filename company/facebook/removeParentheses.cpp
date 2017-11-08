@@ -6,6 +6,7 @@
 #include<string>
 #include<vector>
 #include<stack>
+#include<cassert>
 
 using namespace std;
 
@@ -49,8 +50,16 @@ public:
 
 int main(){
 	Solution s;
-	string test="(()(";
-	cout<<s.remove(test)<<endl;
+	string test1="(()(";
+	string expected1="()";
+	string test2="))()()";
+	string expected2="()()";
+	
+	assert(s.remove(test1)==expected1);
+	cout<<"test1 passed"<<endl;
+
+	assert(s.remove(test2)==expected2);
+	cout<<"test2 passed"<<endl;
 
 	return 0;
 }
