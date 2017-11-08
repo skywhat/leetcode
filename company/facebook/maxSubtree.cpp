@@ -30,7 +30,7 @@ public:
  */
 
 int main(){
-	vector<int> l={1,2,3,NULL_TREENODE,NULL_TREENODE,-5,-6};
+	vector<int> l={1,2,3,NULL_TREENODE,NULL_TREENODE,7,-6};
 	TreeEnv t;
 	TreeNode* root=t.initialTree(l);
 
