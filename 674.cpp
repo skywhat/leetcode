@@ -12,9 +12,9 @@ public:
         int maxLen=1;
         for(int i=1;i<nums.size();++i){
             if(nums[i]>nums[i-1])
-            maxLen=max(++cnt,maxLen);
+            	maxLen=max(++cnt,maxLen);
             else
-            cnt=1;
+            	cnt=1;
         }
         return maxLen;
     }
