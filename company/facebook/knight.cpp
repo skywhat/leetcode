@@ -42,6 +42,7 @@ public:
 				if(next.x==end[0]&&next.y==end[1])
 					return next.step;
 				q.push(next);
+				visit.insert({next.x,next.y});
 			}
 		}
 		return -1;
