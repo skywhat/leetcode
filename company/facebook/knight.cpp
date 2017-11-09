@@ -51,6 +51,7 @@ int main(){
 	int width=1000;
 	vector<int> start={14,15};
 	vector<int> end={11,11};
+	//expected value: 3 steps
 
 	Solution s;
 	cout<<s.minSteps(start,end,width)<<endl;
