@@ -9,6 +9,7 @@
 #include<iostream>
 #include<vector>
 #include<queue>
+#include<set>
 
 using namespace std;
 
@@ -23,19 +24,19 @@ public:
 		state(int m,int n,int s=0):x(m),y(n),step(s){}
 	};
 
-	int minSteps(vector<int>& start,vector<int>& end,int width){
-		vector<vector<int>> visit(width,vector<int>(width,0));
+	int minSteps(vector<int>& start,vector<int>& end){
 		if(start==end)	
 			return 0;
+		set<pair<int,int>> visit;
 		state s(start[0],start[1],0);
-		visit[start[0]][start[1]]=1;
+		visit.insert({start[0],start[1]});
 		queue<state> q;
 		q.push(s);
 		while(!q.empty()){
 			state tmp=q.front();
 			q.pop();
 			for(int i=0;i<8;++i){
-				if(visit[tmp.x+dx[i]][tmp.y+dy[i]])
+				if(visit.count({tmp.x+dx[i],tmp.y+dy[i]}))
 					continue;
 				state next(tmp.x+dx[i],tmp.y+dy[i],tmp.step+1);
 				if(next.x==end[0]&&next.y==end[1])
@@ -48,13 +49,12 @@ public:
 };
 
 int main(){
-	int width=1000;
-	vector<int> start={14,15};
-	vector<int> end={11,11};
+	vector<int> start={4,5};
+	vector<int> end={1,1};
 	//expected value: 3 steps
 
 	Solution s;
-	cout<<s.minSteps(start,end,width)<<endl;
+	cout<<s.minSteps(start,end)<<endl;
 
 	return 0;
 }
