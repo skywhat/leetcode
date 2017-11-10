@@ -31,11 +31,39 @@ public:
 	}
 };
 
+//print path
+class Solution2{
+public:
+	int leastInterval(vector<char>& tasks,int n){
+		vector<int> m(128,0);
+		int time=1;
+		for(int i=0;i<tasks.size();++i){
+			if(m[tasks[i]]==0){//tasks[i] shows up for the first time
+				m[tasks[i]]=time;
+				cout<<tasks[i]<<"->";
+				time++;
+			}
+			else{
+				//A A A B B  B  n=2
+				//1 4 7 8 11 14
+				while(time-m[tasks[i]]<=n){
+					cout<<"#->";
+					time++;
+				}
+				cout<<tasks[i]<<"->";
+				m[tasks[i]]=time;
+				time++;
+			}
+		}
+		cout<<"Done."<<endl;
+		return time-1;
+	}
+};
 
 int main(){
 	vector<char> tasks={'A','A','A','B','B','B'};
 	int n=2;
-	Solution s;
+	Solution2 s;
 
 	int res=s.leastInterval(tasks,n);
 	int expected=14;

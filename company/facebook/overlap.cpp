@@ -47,7 +47,10 @@ int main(){
 	vector<Interval> a={{3,5},{7,11}};	
 	vector<Interval> b={{2,4},{9,11}};
 	
-	auto res=s.overlap(a,b);
+	vector<Interval> a1={{1,2},{3,4},{7,10},{15,16}};	
+	vector<Interval> b1={{0,2},{3,8},{8,12},{16,17}};
+
+	auto res=s.overlap(a1,b1);
 	for(auto item:res){
 		cout<<item.start<<", "<<item.end<<endl;
 	}
