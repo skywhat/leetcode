@@ -15,6 +15,7 @@
 #include<string>
 #include<sstream>
 #include<vector>
+#include<stack>
 
 using namespace std;
 
@@ -45,6 +46,31 @@ public:
             res=collect[i]+(res.size()?"/":"")+res;
         }
         return "/"+res;
+    }
+};
+
+class Solution2 {
+public:
+    string simplifyPath(string path) {
+        stringstream ss(path);
+        stack<string> help;
+        string tmp;
+        while(getline(ss,tmp,'/')){
+            if(tmp=="."||tmp=="")
+                continue;
+            if(tmp==".."){
+                if(!help.empty())
+                    help.pop();
+                continue;
+            }
+            help.push(tmp);
+        }
+        string res;
+        while(!help.empty()){
+            res="/"+help.top()+res;
+            help.pop();
+        }
+        return res.empty()?"/":res;
     }
 };
 
