@@ -32,43 +32,49 @@
 using namespace std;
 
 //union find
+
 class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         map<string,string> owner;
-        map<string,string> parents;
-        map<string,set<string>> s;
-        for(int i=0;i<accounts.size();++i){
-            for(int j=1;j<accounts[i].size();++j){
-                owner[accounts[i][j]]=accounts[i][0];
-                parents[accounts[i][j]]=accounts[i][j];
-            }
-        }
-        for(auto&& ac:accounts){
-            string p=find(ac[1],parents);
-            for(int i=2;i<ac.size();++i){
-                parents[find(ac[i],parents)]=p;
-            }
-        }
-        for(auto&& email:parents){
-            s[find(email.first,parents)].insert(email.first);
-        }
+        map<string,string> parent;
+        map<string,set<string>> united;
         vector<vector<string>> res;
-        for(auto&& p:s){
-            vector<string> tmp(p.second.begin(),p.second.end());
-            tmp.insert(tmp.begin(),owner[p.first]);
+        
+        for(auto&& ac:accounts){
+            for(int i=1;i<ac.size();++i){
+                owner[ac[i]]=ac[0];
+                parent[ac[i]]=ac[i];
+            }
+        }
+        //union the email to the only parent
+        for(auto&& ac:accounts){
+            string p=find(ac[1],parent);
+            for(int i=2;i<ac.size();++i){
+                parent[find(ac[i],parent)]=p;
+            }
+        }
+        
+        //find parent's all the children
+        for(auto&& item:parent){
+            united[find(item.second,parent)].insert(item.first);
+        }
+        for(auto&& u:united){
+            vector<string> tmp(u.second.begin(),u.second.end());
+            tmp.insert(tmp.begin(),owner[u.first]);
             res.push_back(tmp);
         }
         return res;
-        
     }
-    string find(string x,map<string,string>& parents){
-        if(parents[x]==x)
-            return x;
-        else
-            return find(parents[x],parents);
+    string find(string x,map<string,string>& m){
+        while(m[x]!=x){
+            m[x]=m[m[x]];//path compression
+            x=m[x];
+        }
+        return x;
     }
 };
+
 
 int main(){
     
