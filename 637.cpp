@@ -5,6 +5,7 @@
 
 using namespace std;
 
+//BFS
 class Solution {
 public:
 	vector<double> averageOfLevels(TreeNode* root) {
@@ -34,6 +35,35 @@ public:
 		return v;
 	}
 };
+
+//recursive DFS
+class Solution {
+public:
+    vector<double> averageOfLevels(TreeNode* root) {
+        map<int,pair<int,double>> m;
+        vector<double> res;
+        preorder(root,m,0);
+        for(auto item:m){
+            res.push_back(item.second.second/item.second.first);
+        }
+        return res;
+        
+    }
+    void preorder(TreeNode* root,map<int,pair<int,double>>& m,int level){
+        if(root){
+            if(m.find(level)==m.end()){
+                m[level]=make_pair(1,root->val);
+            }
+            else{
+                m[level].first++;
+                m[level].second+=root->val;
+            }
+            preorder(root->left,m,level+1);
+            preorder(root->right,m,level+1);
+        }
+    }
+};
+
 int main() {
 	TreeEnv t;
 	vector<int> list = {4,2,7,1,3,6,9};
