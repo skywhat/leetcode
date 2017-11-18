@@ -71,7 +71,7 @@ int main(){
 	int res=s.dotProduct(v1,v2);
 	
 	cout<<"after dot product: "<<res<<endl;
-
+	//expected: 4*7+3*1=31
 	return 0;
 }
 
