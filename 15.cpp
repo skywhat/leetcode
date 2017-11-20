@@ -8,31 +8,34 @@ class Solution{
 public:
     vector<vector<int>> threeSum(vector<int>& nums){
         vector<vector<int>> res;
+        int n=nums.size();
+        if(n<3)
+            return res;
         sort(nums.begin(),nums.end());
         for(int i=0;i+2<nums.size();++i){
             //nums[i-1]!=nums[i] no more duplicate triplets exists
             //nums[i]<=0 the first element in triplet is obviously less than or equal to 0
-            if((!i||(i>0&&nums[i-1]!=nums[i]))&&(nums[i]<=0)){
+            if(nums[i]<=0&&(i==0||(i>0&&nums[i-1]!=nums[i]))){
+                if(nums[i]+nums[i+1]+nums[i+2]>0)
+                    break;
+                if(nums[i]+nums[n-1]+nums[n-2]<0)
+                    continue;
                 int start=i+1,end=nums.size()-1;
                 int sum=0-nums[i];
                 while(start<end){
                     if(nums[start]+nums[end]>sum){
-                        int prev=nums[end];
-                        while(prev==nums[end])
-                            end--;
+                        end--;
                     }
                     else if(nums[start]+nums[end]<sum){
-                        int prev=nums[start];
-                        while(prev==nums[start])
-                            start++;
+                        start++;
                     }
                     else{
-                        vector<int> temp={nums[i],nums[start],nums[end]};
-                        res.push_back(temp);
+                        res.push_back({nums[i],nums[start],nums[end]});
                         int prev=nums[start];
-                        while(prev==nums[start])
+                        while(start<end&&prev==nums[start])
                             start++;
-                        while(nums[end-1]==nums[end])
+                        prev=nums[end];
+                        while(start<end&&prev==nums[end])
                             end--;
                     }
                 }
@@ -41,7 +44,7 @@ public:
         return res;
     }
 };
-//Your runtime beats 82.46 % of cpp submissions.
+//Your runtime beats 99.85 % of cpp submissions.
 
 int main(){
     vector<int> test={-1,0,1,0};

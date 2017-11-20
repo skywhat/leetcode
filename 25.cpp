@@ -3,39 +3,31 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	ListNode* reverseKGroup(ListNode* head,int k){
-		if(!head||!head->next)
-			return head;
-		ListNode preHead(-1);
-		ListNode* prev=&preHead;
-		prev->next=head;
-		
-		int sum=0;
-		while(head){
-			sum++;
-			head=head->next;
-		}
-		ListNode* prevH=prev;
-		while(k<=sum){
-			ListNode* cur=prevH->next;
-			ListNode* then=cur->next;
-			ListNode* tail=prevH->next;
-			ListNode* temp;
-			for(int i=1;i<k;++i){
-				prevH->next=then;
-				temp=then->next;
-				then->next=cur;
-				cur=prevH->next;
-				then=temp;
-			}
-			prevH=tail;
-			tail->next=then;
-			sum-=k;
-		}
-		return preHead.next;
-	}
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int cnt=0;
+        ListNode preHead(-1);
+        ListNode* prev=&preHead;
+        prev->next=head;
+        while(head){
+            cnt++;
+            head=head->next;
+        }
+        while(cnt>=k){
+            ListNode* cur=prev->next;
+            ListNode* nex=cur->next;
+            for(int i=1;i<k;++i){
+                cur->next=nex->next;
+                nex->next=prev->next;
+                prev->next=nex;
+                nex=cur->next;
+            }
+            prev=cur;
+            cnt-=k;
+        }
+        return preHead.next;
+    }
 };
 
 int main(){
