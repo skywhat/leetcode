@@ -15,7 +15,7 @@ public:
 				width+=words[j].size();
 			}
 			string tmp=words[i];
-			int space=1,extra=0;
+			int space=1,extra=0;//the default space we need for the last row.
 			if(j-i>1&&j<words.size()){
 				//we have j-i strings, then need j-i-1 space
 				space=(maxWidth-width)/(j-i-1);
