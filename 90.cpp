@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//recursive
 class Solution {
 public:
     vector<vector<int>> subsetsWithDup(vector<int>& nums) {
@@ -27,6 +28,31 @@ public:
         }
         
         
+    }
+};
+
+//iterative
+class Solution {
+public:
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> res;
+        sort(nums.begin(),nums.end());
+        res.push_back({});
+        for(int i=0;i<nums.size();){
+            int size=res.size();
+            int cnt=0;
+            while(cnt+i<nums.size()&&nums[cnt+i]==nums[i])
+                cnt++;
+            for(int j=0;j<size;++j){
+                vector<int> tmp=res[j];
+                for(int k=0;k<cnt;++k){
+                    tmp.push_back(nums[i]);
+                    res.push_back(tmp);
+                }
+            }
+            i+=cnt;
+        }
+        return res;
     }
 };
 
