@@ -33,7 +33,7 @@ public:
 };
 
 //union find
-class Solution2 {
+class Solution {
 public:
     vector<vector<int>> dir={{-1,0},{1,0},{0,-1,},{0,1}};
     int numIslands(vector<vector<char>>& grid) {
@@ -55,17 +55,18 @@ public:
                 if(grid[i][j]=='0')
                     continue;
                 int cur=i*n+j;
-                if(root[cur]!=cur)//this position has been unioned.
-                    continue;
+                //if(root[cur]!=cur)//this position has been unioned.
+                //    continue;
                 for(auto&& d:dir){
                     int x=d[0]+i;
                     int y=d[1]+j;
                     if(x<0||x>=m||y<0||y>=n||grid[x][y]=='0')
                         continue;
                     int nb=x*n+y;
+                    int rootCur=find(root,cur);
                     int rootNb=find(root,nb);
-                    if(find(root,cur)!=rootNb){
-                        root[cur]=rootNb;//union two disjoint sets
+                    if(rootCur!=rootNb){
+                        root[rootCur]=rootNb;//union two disjoint sets
                         cur=rootNb;//update the cur to parent
                         cnt--;//two islands were unioned.
                     }
