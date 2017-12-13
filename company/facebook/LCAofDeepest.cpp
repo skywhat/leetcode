@@ -14,10 +14,10 @@ struct TreeNode{
 
 void printTree(TreeNode* root){
     if(!root)
-    return;
+        return;
     cout<<root->val<<", ";
     for(auto kid:root->children)
-    printTree(kid);
+        printTree(kid);
 }
 
 class Solution{
