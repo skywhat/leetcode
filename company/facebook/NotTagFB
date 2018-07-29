@@ -76,6 +76,8 @@ Number of Islands II
 Bulb Switcher
 317    
 Shortest Distance from All Buildings             
+318
+Maximum Product of Word Lengths
 322    
 Coin Change            
 333    
@@ -87,7 +89,9 @@ Design Tic-Tac-Toe
 349    
 Intersection of Two Arrays            
 350    
-Intersection of Two Arrays II             
+Intersection of Two Arrays II  
+360
+Sort Transformed Array           
 443    
 String Compression             
 449    
