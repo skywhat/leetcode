@@ -3,37 +3,33 @@
 
 using namespace std;
 
-class Solution{
-public:
-	struct pos{
-		int x;
-		int y;
-		pos():x(0),y(0){}
-	};
-	bool judgeCircle(string moves){
-		pos p;
-		for(int i=0;i<moves.size();++i){
-			add(p,moves[i]);
-		}
-		if(p.x==0&&p.y==0)
-			return true;
-		else
-			return false;
+class Solution {
+private:
+  int x = 0, y = 0;
 
-	}
-	void add(pos &p,char c){
-		switch(c){
-		case 'U':p.y++;
-				 break;
-		case 'D':p.y--;
-				 break;
-		case 'L':p.x--;
-				 break;
-		case 'R':p.x++;
-				 break;
-		default:break;
-		}
-	}
+public:
+  bool judgeCircle(string moves) {
+    for (int i = 0; i < moves.size(); ++i) {
+      switch (moves[i]) {
+      case 'L':
+        x--;
+        break;
+      case 'R':
+        x++;
+        break;
+      case 'U':
+        y++;
+        break;
+      case 'D':
+        y--;
+        break;
+      default:
+        break;
+      }
+    }
+
+    return x == 0 && y == 0;
+  }
 };
 
 int main(){
