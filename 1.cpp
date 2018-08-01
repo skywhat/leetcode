@@ -7,19 +7,18 @@ using namespace std;
 class Solution{
 public:
 	vector<int> twoSum(vector<int>& nums,int target){
-		unordered_map<int,int> m;
-		vector<int> res;
+		unordered_map<int,int> table;
+		
 		for(int i=0;i<nums.size();++i){
-			if(m.find(target-nums[i])!=m.end()){
-				res.push_back(m[target-nums[i]]);
-				res.push_back(i);
-				return res;
+			if(table.find(target-nums[i])!=table.end()){
+				return vector<int>{table[target-nums[i]], i};
 			}
 			else{
-				m[nums[i]]=i;
+				table[nums[i]]=i;
 			}
 		}
-		return res;
+		
+        	return vector<int>();
 	}
 
 };
