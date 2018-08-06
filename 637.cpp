@@ -43,16 +43,15 @@ public:
         map<int,pair<int,double>> m;
         vector<double> res;
         preorder(root,m,0);
-        for(auto item:m){
-            res.push_back(item.second.second/item.second.first);
+        for(int i=0;m.count(i);++i){
+            res.push_back(m[i].second/m[i].first);
         }
         return res;
-        
     }
     void preorder(TreeNode* root,map<int,pair<int,double>>& m,int level){
         if(root){
             if(m.find(level)==m.end()){
-                m[level]=make_pair(1,root->val);
+            	m[level]=make_pair(1,root->val);
             }
             else{
                 m[level].first++;
