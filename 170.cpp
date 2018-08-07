@@ -23,13 +23,14 @@ public:
     
     /** Find if there exists any pair of numbers which sum is equal to the value. */
     bool find(int value) {
-        for(auto it=m.begin();it!=m.end();++it){
-            int num1=it->first;
-            int num2=value-num1;
-            if(num1==num2&&it->second>=2)
+        for(auto num: m){
+            int num2 = value - num.first;
+            if(num2== num.first && num.second>=2){
                 return true;
-            else if(num1!=num2&&m.find(num2)!=m.end())
+            }
+            else if(num2 != num.first && m.count(num2)){
                 return true;
+            }
         }
         return false;
     }
