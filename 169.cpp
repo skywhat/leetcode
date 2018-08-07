@@ -4,24 +4,26 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int majorityElement(vector<int>& nums){
-		int majority=nums[0],count=1;
-		for(int i=1;i<nums.size();++i){
-			if(nums[i]==majority)
-				count++;
-			else{
-				if(count==0){
-					majority=nums[i];
-					count++;
-				}
-				else
-					count--;
-			}
-		}
-		return majority;
-	}
+    int majorityElement(vector<int>& nums) {
+        int count = 0;
+        int majority;
+        for(auto n: nums){
+            if(count == 0){
+                majority = n;
+                count = 1;
+            }
+            else if (majority == n){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        
+        return majority;
+    }
 };
 
 class Solution2{
