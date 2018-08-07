@@ -22,21 +22,24 @@ Interval():start(0),end(0){}
 Interval(int s,int e):start(s),end(e){}
 };
 
-class Solution{
+class Solution {
 public:
-	bool canAttendMeetings(vector<Interval>& intervals){
-		sort(intervals.begin(),intervals.end(),
-				[](Interval i,Interval j){
-					return i.start<j.start;
-				});
-		int i=0;
-		while(i+1<intervals.size()){
-			if(intervals[i].end>intervals[i+1].start)
-				return false;
-			i++;
-		}
-		return true;
-	}
+    bool canAttendMeetings(vector<Interval>& intervals) {
+        sort(intervals.begin(), intervals.end(), [](Interval i, Interval j){
+            return i.start < j.start;
+        });
+        
+        int i=1;
+        while(i<intervals.size()){
+            if(intervals[i].start < intervals[i-1].end){
+                return false;
+            }
+            i++;
+        }
+            
+        return true;
+    }
+};
 };
 
 int main(){
