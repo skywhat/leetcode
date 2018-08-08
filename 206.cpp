@@ -5,20 +5,21 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	ListNode* reverseList(ListNode* head){
-		ListNode* new_head=nullptr;
-		ListNode* cur=head;
-		ListNode* temp;
-		while(cur){
-			temp=cur->next;
-			cur->next=new_head;
-			new_head=cur;
-			cur=temp;
-		}
-		return new_head;
-	}
+    ListNode* reverseList(ListNode* head) {   
+        ListNode* prev = nullptr;
+        ListNode* temp = head;
+        
+        while(head){
+            temp = head->next;
+            head->next = prev;
+            prev = head;
+            head = temp;
+        }
+        
+        return prev;
+    }
 };
 
 class Solution2{
