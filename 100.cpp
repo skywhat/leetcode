@@ -24,26 +24,37 @@ public:
 };
 
 //iterative . one stack
-class Solution2 {
+class Solution {
 public:
     bool isSameTree(TreeNode* p, TreeNode* q) {
         stack<TreeNode*> s;
         s.push(p);
         s.push(q);
+        
         while(!s.empty()){
-            TreeNode* cur2=s.top();s.pop();
-            TreeNode* cur1=s.top();s.pop();
-            if(cur1==nullptr&&cur2==nullptr)
+            TreeNode* cur1 = s.top();
+            s.pop();
+            TreeNode* cur2 = s.top();
+            s.pop();
+            
+            if(!cur1 && !cur2){
                 continue;
-            if(cur1==nullptr||cur2==nullptr)
+            }
+            
+            if(!cur1 || !cur2){
                 return false;
-            if(cur1->val!=cur2->val)
+            }
+            
+            if(cur1->val != cur2->val){
                 return false;
+            }
+            
             s.push(cur1->left);
             s.push(cur2->left);
             s.push(cur1->right);
             s.push(cur2->right);
         }
+        
         return true;
     }
 };
