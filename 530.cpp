@@ -10,20 +10,18 @@
 class Solution {
 public:
     int getMinimumDifference(TreeNode* root) {
-        int minVal=INT_MAX;
-        int prev=INT_MAX;
-        int cur;
-        dfs(root,minVal,prev,cur);
-        return minVal;
+        int min_diff = INT_MAX;
+        int prev = INT_MAX;        
+        preorder(root, prev, min_diff);
+        return min_diff;
     }
     
-    void dfs(TreeNode* root,int& minVal,int& prev, int& cur){
+    void preorder(TreeNode* root, int& prev, int& min_diff){
         if(root){
-            dfs(root->left,minVal,prev,cur);
-            cur=root->val;
-            minVal=min(minVal,abs(cur-prev));
-            prev=cur;
-            dfs(root->right,minVal,prev,cur);
+            preorder(root->left, prev, min_diff);
+            min_diff = min(min_diff, abs(root->val-prev));
+            prev = root->val;
+            preorder(root->right, prev, min_diff);
         }
     }
 };
