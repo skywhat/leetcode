@@ -3,18 +3,20 @@
 #include<vector>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	bool canConstruct(string ransomNote, string magazine){
-		vector<int> dict(256,0);
-		for(auto m:magazine)
-			dict[m]++;
-		for(auto r:ransomNote){
-			if(--dict[r]<0)
-				return false;
-		}
-		return true;
-	}
+    bool canConstruct(string ransomNote, string magazine) {
+        vector<int> dict(128, 0);
+        for(auto c: magazine){
+            dict[c]++;
+        }
+        for(auto c: ransomNote){
+            if(--dict[c] < 0){
+                return false;
+            }
+        }  
+        return true;
+    }
 };
 
 int main(){
