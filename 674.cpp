@@ -6,17 +6,23 @@ using namespace std;
 class Solution {
 public:
     int findLengthOfLCIS(vector<int>& nums) {
-        if(!nums.size())
-        return 0;
-        int cnt=1;
-        int maxLen=1;
-        for(int i=1;i<nums.size();++i){
-            if(nums[i]>nums[i-1])
-            	maxLen=max(++cnt,maxLen);
-            else
-            	cnt=1;
+        if(nums.size()<2){
+            return nums.size();
         }
-        return maxLen;
+        
+        int max_len = 1;
+        int cnt = 1;
+        
+        for(int i=1;i<nums.size();++i){
+            if(nums[i] > nums[i-1]){
+                max_len = max(max_len, ++cnt);
+            }
+            else{
+                cnt = 1;
+            }
+        }
+        
+        return max_len;
     }
 };
 
