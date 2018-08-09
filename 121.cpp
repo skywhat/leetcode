@@ -3,17 +3,22 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int maxProfit(vector<int>& prices){
-		int profit=0;
-		int minValue=prices[0];
-		for(int i=1;i<prices.size();++i){
-			profit=max(profit,prices[i]-minValue);
-			minValue=min(minValue,prices[i]);
-		}
-		return profit;
-	}
+    int maxProfit(vector<int>& prices) {
+        if(prices.size()<2){
+            return 0;
+        }
+        
+        int min_price = prices[0];
+        int max_profit = 0;
+        for(int i=1;i<prices.size();++i){
+            max_profit = max(max_profit, prices[i]-min_price);
+            min_price = min(min_price, prices[i]);
+        }
+        
+        return max_profit;
+    }
 };
 
 int main(){
