@@ -4,22 +4,49 @@
 
 using namespace std;
 
+// Time: O(m+n) Space: O(m+n)
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        sort(nums1.begin(),nums1.end());
-        sort(nums2.begin(),nums2.end());
+        sort(nums1.begin(), nums1.end());
+        sort(nums2.begin(), nums2.end());
         vector<int> res;
-        for(int i=0,j=0;i<nums1.size()&&j<nums2.size();){
-            if(nums1[i]<nums2[j])
+        
+        int i = 0, j = 0;
+        while(i<nums1.size() && j<nums2.size()){
+            if(nums1[i] == nums2[j]){
+                res.push_back(nums1[i]);
                 i++;
-            else if(nums1[i]>nums2[j])
                 j++;
+            }
+            else if(nums1[i] < nums2[j]){
+                i++;
+            }
             else{
-                res.push_back(nums1[i++]);
                 j++;
             }
         }
+        
+        return res;
+    }
+};
+
+// Time: O(max(m, n) log(max(m, n))) Space: O(m + n)
+class Solution2 {
+public:
+    vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
+        unordered_map<int,int> dict;
+        vector<int> res;
+        for(auto n: nums1){
+            dict[n]++;
+        }
+        
+        for(auto n: nums2){
+            if(--dict[n]>=0){
+                res.push_back(n);
+            }
+        }
+        
         return res;
     }
 };
