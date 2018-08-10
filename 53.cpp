@@ -6,17 +6,18 @@ using namespace std;
 
 class Solution {
 public:
-	int maxSubArray(vector<int>& nums) {
-		vector<int> sumArray(nums.size(), nums[0]);
-		int minSum = min(0,sumArray[0]);
-		int maxValue = nums[0];
-		for (int i = 1; i < sumArray.size(); ++i) {
-			sumArray[i] = sumArray[i - 1] + nums[i];
-			maxValue = max(sumArray[i] - minSum, maxValue);
-			minSum = min(sumArray[i], minSum);
-		}
-		return maxValue;
-	}
+    int maxSubArray(vector<int>& nums) {
+        int min_sum = min(0, nums[0]);
+        int cur_sum = nums[0];
+        int max_subsum = nums[0];
+        for(int i=1;i<nums.size();++i){
+            cur_sum += nums[i];
+            max_subsum = max(max_subsum, cur_sum-min_sum);
+            min_sum = min(min_sum, cur_sum);
+        }
+        
+        return max_subsum;
+    }
 };
 
 int main() {
