@@ -26,20 +26,22 @@ public:
 class Solution2 {
 public:
     bool isHappy(int n) {
-        unordered_set<int> s;
-        while(true){
-            int sum=0;
-            while(n){
-                sum+=(n%10)*(n%10);
-                n/=10;
+        unordered_set<int> sum_set;
+        while(n!=1){
+            int temp = n;
+            int sum = 0;
+            while(temp){
+                sum += (temp%10)*(temp%10);
+                temp /=10;
             }
-            if(sum==1)
-                return true;
-            if(s.find(sum)!=s.end())
+            if(sum_set.count(sum)){
                 return false;
-            s.insert(sum);
+            }
+            sum_set.insert(sum);
             n=sum;
         }
+        
+        return true;
     }
 };
 
