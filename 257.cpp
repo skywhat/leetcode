@@ -10,52 +10,60 @@ class Solution {
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
         vector<string> res;
-        dfs(root,res,"");
+        string path;
+        preorder(root, path, res);
         return res;
     }
-    void dfs(TreeNode* root,vector<string>& res,string temp){
+    
+    void preorder(TreeNode* root, string path, vector<string>& res){
         if(root){
-            temp+=to_string(root->val);
-            if(!root->left&&!root->right)
-            res.push_back(temp);
-            else{
-                dfs(root->left,res,temp+"->");
-                dfs(root->right,res,temp+"->");
+            if(!root->left && !root->right){
+                res.push_back(path+to_string(root->val));
+                return;
             }
+            
+            preorder(root->left, path+to_string(root->val)+"->", res);
+            preorder(root->right, path+to_string(root->val)+"->", res);
         }
     }
 };
 
 //iterative
-class Solution {
+class Solution2 {
 public:
     vector<string> binaryTreePaths(TreeNode* root) {
-        queue<TreeNode*> q;
         queue<string> paths;
+        queue<TreeNode*> nodes;
         vector<string> res;
         if(root){
-            q.push(root);
+            nodes.push(root);
             paths.push(to_string(root->val));
         }
-        while(!q.empty()){
-            int size=q.size();
+        
+        while(!nodes.empty()){
+            int size = nodes.size();
             while(size--){
-                TreeNode* cur=q.front();q.pop();
-                string curP=paths.front();paths.pop();
-                if(!cur->left&&!cur->right){
-                    res.push_back(curP);
+                TreeNode* cur_node = nodes.front();
+                nodes.pop();
+                string cur_path = paths.front();
+                paths.pop();
+                
+                if(!cur_node->left && !cur_node->right){
+                    res.push_back(cur_path);
                     continue;
                 }
-                if(cur->left){
-                    q.push(cur->left);
-                    paths.push(curP+"->"+to_string(cur->left->val));
+                
+                if(cur_node->left){
+                    nodes.push(cur_node->left);
+                    paths.push(cur_path+"->"+to_string(cur_node->left->val));
                 }
-                if(cur->right){
-                    q.push(cur->right);
-                    paths.push(curP+"->"+to_string(cur->right->val));
+                if(cur_node->right){
+                    nodes.push(cur_node->right);
+                    paths.push(cur_path+"->"+to_string(cur_node->right->val));
                 }
             }
         }
+        
         return res;
     }
 };
