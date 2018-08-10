@@ -4,16 +4,22 @@
 #include<iterator>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int removeElement(vector<int>& nums,int val){
-		int begin=0;
-		for(int i=0;i<nums.size();++i){
-			if(nums[i]!=val)
-				nums[begin++]=nums[i];
-		}
-		return begin;
-	}
+    int removeElement(vector<int>& nums, int val) {
+        int start = 0;
+        
+        for(int i=0;i<nums.size();++i){
+            if(nums[i] != val){
+                if(i != start){
+                    swap(nums[i], nums[start]);
+                }
+                start++;
+            }
+        }
+        
+        return start;
+    }
 };
 
 int main(){
