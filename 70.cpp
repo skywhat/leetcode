@@ -4,18 +4,22 @@ using namespace std;
 
 class Solution {
 public:
-	int climbStairs(int n) {
-		int a = 1;
-		int b = 1;
-		for (int i = 2; i <= n; ++i) {
-			a = a + b;
-			//swap
-			a = a + b;
-			b = a - b;
-			a = a - b;
-		}
-		return b;
-	}
+    int climbStairs(int n) {
+        if(n==1){
+            return 1;
+        }
+        
+        int one_step_behind = 1;
+        int two_steps_behind = 1;
+        int cur;
+        for(int i=2;i<=n;++i){
+            cur = one_step_behind+two_steps_behind;
+            two_steps_behind = one_step_behind;
+            one_step_behind = cur;
+        }
+        
+        return cur;
+    }
 };
 
 int main() {
