@@ -14,20 +14,18 @@ using namespace std;
 
 class Solution {
 public:
-	int closestValue(TreeNode* root, double target) {
-		int result = root->val;
-		while (root) {
-			if (abs(root->val - target) < abs(result - target))
-				result = root->val;
-			if (root->val < target)
-				root = root->right;
-			else
-				root = root->left;
-		}
-		return result;
-	}
+    int closestValue(TreeNode* root, double target) {
+        int closest = root->val;
+        while(root){
+            if(abs(closest - target) > abs(root->val - target)){
+                closest = root->val;
+            }
+            root = target < root->val?  root->left:root->right;
+        }
+        
+        return closest;
+    }
 };
-
 
 int main() {
 	vector<int> treeListBST = { 1500000000,1400000000 };
