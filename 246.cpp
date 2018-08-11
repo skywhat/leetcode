@@ -16,19 +16,18 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
+private:
+    string rotate = "01____9_86";
 public:
-	bool isStrobogrammatic(string num){
-		unordered_map<char,char> m={
-			{'0','0'},{'1','1'},{'6','9'},{'9','6'},{'8','8'}
-		};
-		int i=0,j=num.size()-1;
-		while(i<=j){
-			if(num[i++]!=m[num[j--]])
-				return false;
-		}
-		return true;
-	}
+    bool isStrobogrammatic(string num) {
+        string upside_down;
+        for(int i=num.size()-1;i>=0;--i){
+            upside_down += rotate[num[i]-'0'];
+        }
+        
+        return upside_down == num;
+    }
 };
 
 int main(){
