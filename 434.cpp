@@ -6,21 +6,35 @@ using namespace std;
 class Solution{
 public:
 	int countSegments(string s){
-		int ans=0;
-		vector<bool> c(256,true);
-		c[' ']=false;
+		int cnt=0;
 		int i=0;
 		while(i<s.size()){
-			if(c[s[i]]){
-				while(i<s.size()&&c[s[i]])
-					i++;
-				ans++;
+			if(s[i]!=' '){
+				while(i<s.size() && s[i]!=' '){
+                    i++;
+                }
+				cnt++;
 			}
-			while(i<s.size()&&!c[s[i]])
-				i++;
+			while(i<s.size() && s[i]==' '){
+                i++;
+            }
 		}
-		return ans;
+		return cnt;
 	}
+};
+
+class Solution2 {
+public:
+    int countSegments(string s) {
+        int cnt = 0;
+        s.push_back(' ');
+        for(int i=1;i<s.size();++i){
+            if(s[i-1]!=' ' && s[i]==' '){
+                cnt++;
+            }
+        }
+        return cnt;
+    }
 };
 
 int main(){
