@@ -4,17 +4,19 @@
 using namespace std;
 
 class NumArray {
-public:
+private:
     vector<int> sum;
+public:
     NumArray(vector<int> nums) {
-        int n=nums.size();
-        sum.assign(n+1,0);
-        for(int i=1;i<=n;++i)
-            sum[i]=sum[i-1]+nums[i-1];
+        int n = nums.size();
+        sum.assign(n+1, 0);
+        for(int i=0;i<n;++i){
+            sum[i+1] = sum[i] + nums[i];
+        }
     }
-
+    
     int sumRange(int i, int j) {
-        return sum[j+1]-sum[i];
+        return sum[j+1] - sum[i];
     }
 };
 
