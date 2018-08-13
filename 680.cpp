@@ -4,28 +4,30 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	bool validPalindrome(string s){
-		int i=0,j=s.size()-1;
-		while(i<j){
-			if(s[i]!=s[j]){
-				return validhelper(s,i+1,j)||validhelper(s,i,j-1);
-			}
-			i++;
-			j--;
-		}
-		return true;
-	}
-	bool validhelper(const string& s,int left, int right){
-		while(left<right){
-			if(s[left]!=s[right])
-				return false;
-			left++;
-			right--;
-		}
-		return true;
-	}
+    bool validPalindrome(string s) {
+        int i=0,j=s.size()-1;
+        while(i<j){
+            if(s[i] != s[j]){
+                return valid(s, i+1, j) || valid(s, i, j-1);
+            }
+            i++;
+            j--;
+        }
+        
+        return true;
+    }
+    
+    bool valid(string s, int left, int right){
+        while(left < right){
+            if(s[left++] != s[right--]){
+                return false;
+            }
+        }
+        
+        return true;
+    }
 };
 
 int main(){
