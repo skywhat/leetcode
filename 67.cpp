@@ -3,23 +3,27 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	string addBinary(string a,string b){
-		int i=a.size()-1,j=b.size()-1;
-		string c;
-		int carry=0;
-		while(i>=0||j>=0||carry==1){
-			int m=i>=0?a[i]-'0':0;
-			int n=j>=0?b[j]-'0':0;
-			int sum=m+n+carry;
-			c=(sum%2?"1":"0")+c;
-			carry=sum/2;
-			i--;
-			j--;
-		}
-		return c;
-	}	
+    string addBinary(string a, string b) {
+        if(a == "0"){
+            return b;
+        }
+        if(b == "0"){
+            return a;
+        }
+        
+        string res;
+        int i=a.size()-1, j=b.size()-1;
+        int carry = 0;
+        while(i>=0 || j>=0 || carry){
+            int digit = (i>=0? a[i--]-'0':0) + (j>=0? b[j--]-'0':0) + carry;
+            res = to_string(digit%2) + res;
+            carry = digit/2;
+        }
+        
+        return res;
+    }
 };
 
 int main(){
