@@ -2,24 +2,26 @@
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int mySqrt(int x){
-		if(x==0||x==1)
-			return x;
-		int left=1,right=x;
-		while(left<right){
-			int mid=left+(right-left)/2;
-			if(mid>x/mid)
-				right=mid-1;
-			else
-				left=mid+1;
-		}
-		if(left>x/left)
-			return left-1;
-		else
-			return left;
-	}
+    int mySqrt(int x) {
+        if(x == 0 || x == 1){
+            return x;
+        }
+        
+        int i=0,j=x;
+        while(i+1 < j){
+            int mid = i + (j-i)/2;
+            if(mid < x/mid){
+                i = mid;
+            }
+            else{
+                j = mid;
+            }
+        }
+        
+        return j <= x/j? j:i;
+    }
 };
 
 int main(){
