@@ -7,6 +7,7 @@ using namespace std;
 class Solution {
 private:
         vector<int> alpha_numeric;
+        
 public:
     Solution(){
         alpha_numeric.assign(128, 0);
@@ -20,8 +21,10 @@ public:
             alpha_numeric[i] = i;
         }
     }
+        
     bool isPalindrome(string s) {
         int i=0,j=s.size()-1;
+            
         while(i<j){
             if(alpha_numeric[s[i]] == 0){
                 i++;
