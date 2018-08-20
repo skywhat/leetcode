@@ -1,6 +1,6 @@
-#include<iostream>
-#include<stack>
 #include "Tree.h"
+#include <iostream>
+#include <stack>
 
 using namespace std;
 
@@ -9,16 +9,16 @@ public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
         stack<TreeNode*> s;
-        TreeNode* curNode=root;
-        while(curNode||!s.empty()){
-            if(curNode){
-                res.push_back(curNode->val);
-                s.push(curNode);
-                curNode=curNode->left;
-            }else{
-                curNode=s.top();
+
+        while (root || !s.empty()) {
+            if (root) {
+                res.push_back(root->val);
+                s.push(root);
+                root = root->left;
+            } else {
+                root = s.top();
                 s.pop();
-                curNode=curNode->right;
+                root = root->right;
             }
         }
         return res;
@@ -29,14 +29,14 @@ class Solution2 {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
         vector<int> res;
-        preorder(root,res);
+        preorder(root, res);
         return res;
     }
-    void preorder(TreeNode* root,vector<int>& res){
-        if(root){
+    void preorder(TreeNode* root, vector<int>& res) {
+        if (root) {
             res.push_back(root->val);
-            preorder(root->left,res);
-            preorder(root->right,res);
+            preorder(root->left, res);
+            preorder(root->right, res);
         }
     }
 };
