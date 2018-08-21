@@ -1,24 +1,22 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 class TicTacToe {
 public:
-    /** Initialize your data structure here. */
-    vector<int> rows;
-    vector<int> cols;
+    vector<int> vert;
+    vector<int> hori;
     int diag1;
     int diag2;
     int _n;
+    /** Initialize your data structure here. */
     TicTacToe(int n) {
-        rows.reserve(n);
-        rows.assign(n,0);
-        cols.reserve(n);
-        cols.assign(n,0);
-        diag1=0;
-        diag2=0;
-        _n=n;
+        _n = n;
+        vert.assign(n, 0);
+        hori.assign(n, 0);
+        diag1 = 0;
+        diag2 = 0;
     }
 
     /** Player {player} makes a move at ({row}, {col}).
@@ -30,15 +28,20 @@ public:
                 1: Player 1 wins.
                 2: Player 2 wins. */
     int move(int row, int col, int player) {
-        int add=player==1?1:-1;
-        rows[row]+=add;
-        cols[col]+=add;
-        if(row==col)
-            diag1+=add;
-        if(row+col==_n-1)
-            diag2+=add;
-        if(abs(rows[row])==_n||abs(cols[col])==_n||abs(diag1)==_n||abs(diag2)==_n)
+        int add = player == 1 ? 1 : -1;
+        vert[row] += add;
+        hori[col] += add;
+        if (row == col) {
+            diag1 += add;
+        }
+        if (row + col == _n - 1) {
+            diag2 += add;
+        }
+        if (abs(vert[row]) == _n || abs(hori[col]) == _n || abs(diag1) == _n
+            || abs(diag2) == _n) {
             return player;
+        }
+
         return 0;
     }
 };
