@@ -1,63 +1,66 @@
-#include<iostream>
-#include<string>
+#include <iostream>
+#include <string>
 
 using namespace std;
 
 class Trie {
-private:
-    struct TrieNode{
+public:
+    struct TrieNode {
         TrieNode* next[26];
         bool have;
-        TrieNode(bool h=false):have(h){
-            for(int i=0;i<=25;++i)
-            next[i]=nullptr;
+        TrieNode(bool h = false) : have(h) {
+            for (int i = 0; i < 26; ++i) {
+                next[i] = nullptr;
+            }
         }
     };
-public:
-    TrieNode* root;
+
     /** Initialize your data structure here. */
-    Trie() {
-        root=new TrieNode();
-    }
-    
+    TrieNode* root;
+
+    Trie() { root = new TrieNode(); }
+
     /** Inserts a word into the trie. */
     void insert(string word) {
-        TrieNode* cur=root;
-        for(size_t i=0;i<word.size();++i){
-            if(cur->next[word[i]-'a']==nullptr){
-                cur->next[word[i]-'a']=new TrieNode();
+        TrieNode* cur = root;
+        for (int i = 0; i < word.size(); ++i) {
+            if (cur->next[word[i] - 'a'] == nullptr) {
+                cur->next[word[i] - 'a'] = new TrieNode();
             }
-            cur=cur->next[word[i]-'a'];
+            cur = cur->next[word[i] - 'a'];
         }
-        cur->have=true;
+
+        cur->have = true;
     }
-    
+
     /** Returns if the word is in the trie. */
     bool search(string word) {
-        TrieNode* cur=root;
-        size_t i=0;
-        while(i<word.size()&&cur){
-            cur=cur->next[word[i++]-'a'];
+        TrieNode* cur = root;
+        for (int i = 0; i < word.size(); ++i) {
+            if (cur->next[word[i] - 'a'] == nullptr) {
+                return false;
+            }
+            cur = cur->next[word[i] - 'a'];
         }
-        if(cur)
+
         return cur->have;
-        else
-        return false;
     }
-    
-    /** Returns if there is any word in the trie that starts with the given prefix. */
+
+    /** Returns if there is any word in the trie that starts with the given
+     * prefix. */
     bool startsWith(string prefix) {
-        TrieNode* cur=root;
-        size_t i=0;
-        while(i<prefix.size()&&cur){
-            cur=cur->next[prefix[i++]-'a'];
+        TrieNode* cur = root;
+        for (int i = 0; i < prefix.size(); ++i) {
+            if (cur->next[prefix[i] - 'a'] == nullptr) {
+                return false;
+            }
+            cur = cur->next[prefix[i] - 'a'];
         }
-        return cur?true:false;
+
+        return true;
     }
-    ~Trie(){
-        delete root;
-    }
-    
+
+    ~Trie() { delete root; }
 };
 
 /**
@@ -68,11 +71,11 @@ public:
  * bool param_3 = obj.startsWith(prefix);
  */
 
-int main(){
+int main() {
     Trie obj;
     obj.insert("abc");
-    cout<<obj.search("ab")<<endl;
-    cout<<obj.search("abc")<<endl;
-    
+    cout << obj.search("ab") << endl;
+    cout << obj.search("abc") << endl;
+
     return 0;
 }
