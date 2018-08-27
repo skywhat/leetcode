@@ -1,56 +1,63 @@
-#include<iostream>
-#include<vector>
-#include<unordered_set>
-#include<queue>
+#include <iostream>
+#include <queue>
+#include <unordered_set>
+#include <vector>
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int ladderLength(string beginWord,string endWord,vector<string>& wordList){
-		unordered_set<string> w(wordList.begin(),wordList.end());
-		queue<string> toVisit;
-		int dist=2;
-		addNextWord(w,beginWord,toVisit);
-		while(!toVisit.empty()){
-			size_t size=toVisit.size();
-			while(size--){
-				string temp=toVisit.front();
-				if(temp==endWord)
-					return dist;
-				toVisit.pop();
-				addNextWord(w,temp,toVisit);
-			}
-			dist++;
-		}
-		return 0;
-	}
+    int ladderLength(string beginWord,
+                     string endWord,
+                     vector<string>& wordList) {
+        unordered_set<string> words(wordList.begin(), wordList.end());
+        queue<string> toVisit;
+        addNextWord(words, toVisit, beginWord);
+        int dist = 2;
+        while (!toVisit.empty()) {
+            int size = toVisit.size();
+            while (size--) {
+                string next = toVisit.front();
+                toVisit.pop();
+                if (next == endWord) {
+                    return dist;
+                }
+                addNextWord(words, toVisit, next);
+            }
+            dist++;
+        }
 
-	void addNextWord(unordered_set<string>& w,string beginWord,queue<string>& toVisit){
-		for(size_t i=0;i<beginWord.size();++i){
-			char backup=beginWord[i];
-			for(char x='a';x<='z';++x){
-				beginWord[i]=x;
-				auto it=w.find(beginWord);
-				if(it!=w.end()){
-					toVisit.push(beginWord);
-					w.erase(it);
-				}
-			}
-			beginWord[i]=backup;
-		}
-	}
+        return 0;
+    }
 
-};	
+    void addNextWord(unordered_set<string>& words,
+                     queue<string>& toVisit,
+                     string begin) {
+        for (int i = 0; i < begin.size(); ++i) {
+            char x = begin[i];
+            for (char ch = 'a'; ch <= 'z'; ++ch) {
+                if (ch == x) {
+                    continue;
+                }
 
-int main(){
-	string beginWord="hit";
-	string endWord="cog";
-	vector<string> wordList={"hot","dot","dog","lot","log","cog"};
-	Solution s;
-	cout<<s.ladderLength(beginWord,endWord,wordList)<<endl;
+                begin[i] = ch;
+                auto it = words.find(begin);
+                if (it != words.end()) {
+                    toVisit.push(begin);
+                    words.erase(it);
+                }
+            }
+            begin[i] = x;
+        }
+    }
+};
 
-	return 0;
+int main() {
+    string beginWord = "hit";
+    string endWord = "cog";
+    vector<string> wordList = {"hot", "dot", "dog", "lot", "log", "cog"};
+    Solution s;
+    cout << s.ladderLength(beginWord, endWord, wordList) << endl;
+
+    return 0;
 }
-
-
