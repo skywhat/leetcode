@@ -19,19 +19,18 @@ array's size.
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
-        unordered_map<int, int> m;
-        for (auto n : nums) {
-            m[n]++;
+        unordered_map<int, int> freq;
+        for (auto&& n : nums) {
+            freq[n]++;
         }
 
-        priority_queue<pair<int, int>> freq;
+        priority_queue<pair<int, int>> q;
         vector<int> res;
-
-        for (auto item : m) {
-            freq.push(make_pair(item.second, item.first));
-            if (freq.size() > m.size() - k) {
-                res.push_back(freq.top().second);
-                freq.pop();
+        for (auto&& f : freq) {
+            q.push(make_pair(f.second, f.first));
+            if (q.size() > freq.size() - k) {
+                res.push_back(q.top().second);
+                q.pop();
             }
         }
 
