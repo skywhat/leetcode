@@ -39,8 +39,6 @@ public:
                     heights[j]++;
                 }
             }
-            copy(heights.begin(), heights.end(),
-                 ostream_iterator<int>(cout, ", "));
             max_area = max(max_area, maxHistArea(heights));
         }
 
@@ -61,6 +59,49 @@ public:
                 index.pop();
                 int left_index = index.empty() ? -1 : index.top();
                 max_area = max(max_area, h * (i - left_index - 1));
+            }
+        }
+
+        return max_area;
+    }
+};
+
+class Solution2 {
+public:
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        int m = matrix.size();
+        if (!m) {
+            return 0;
+        }
+        int n = matrix[0].size();
+        vector<int> heights(n, 0);
+        vector<int> left(n, 0);
+        vector<int> right(n, n);
+        int max_area = 0;
+
+        for (int i = 0; i < m; ++i) {
+            int cur_left = 0, cur_right = n;
+            for (int j = 0; j < n; ++j) {
+                if (matrix[i][j] == '0') {
+                    heights[j] = 0;
+                    left[j] = 0;
+                    cur_left = j + 1;
+                } else {
+                    heights[j]++;
+                    left[j] = max(left[j], cur_left);
+                }
+            }
+            for (int j = n - 1; j >= 0; --j) {
+                if (matrix[i][j] == '0') {
+                    right[j] = n;
+                    cur_right = j;
+                } else {
+                    right[j] = min(right[j], cur_right);
+                }
+            }
+
+            for (int j = 0; j < n; ++j) {
+                max_area = max(max_area, heights[j] * (right[j] - left[j]));
             }
         }
 
