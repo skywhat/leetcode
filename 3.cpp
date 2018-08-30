@@ -1,32 +1,78 @@
-#include<iostream>
-#include<vector>
-#include<algorithm>
-#include<string>
+#include <algorithm>
+#include <iostream>
+#include <string>
+#include <vector>
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	int lengthOfLongestSubstring(string s){
-		vector<int> pos(256,-1);
-		int start=-1;
-		int res=0;
-		for(int i=0;i<s.size();++i){
-			if(pos[s[i]]>start)
-				start=pos[s[i]];
-			pos[s[i]]=i;
-			res=max(res,i-start);
-		}	
-		return res;
-	}
+    int lengthOfLongestSubstring(string s) {
+        unordered_map<int, int> m;
+        int start = 0;
+        int longest = 0;
+        for (int i = 0; i < s.size(); ++i) {
+            if (m.count(s[i])) {
+                start = max(start, m[s[i]] + 1);
+            }
+            m[s[i]] = i;
+            longest = max(longest, i - start + 1);
+        }
+
+        return longest;
+    }
 };
 
-int main(){
-	string testcase="abcabcbb";
-	string testcase1="dvdf";
-	Solution s;
-	cout<<s.lengthOfLongestSubstring(testcase)<<endl;
+class Solution2 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> m(128, 0);
+        int start = 0, end = 0;
+        int longest = 0;
 
-	return 0;
+        while (end < s.size()) {
+            m[s[end]]++;
+            while (m[s[end]] > 1) {
+                if (end - start > longest) {
+                    longest = end - start;
+                }
+                m[s[start]]--;
+                start++;
+            }
+            end++;
+        }
+
+        return max(longest, end - start);
+    }
+};
+
+class Solution3 {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> pos(128, -1);
+        int start = -1, end = 0;
+        int longest = 0;
+
+        for (int i = 0; i < s.size(); ++i) {
+            // we find one character appear again which already within the gap
+            // from start to i, update start
+            if (pos[s[i]] > start) {
+                start = pos[s[i]];
+            }
+            pos[s[i]] = i;
+            longest = max(longest, i - start);
+        }
+
+        return longest;
+    }
+};
+
+int main() {
+    string testcase = "abcabcbb";
+    string testcase1 = "dvdf";
+    Solution s;
+    cout << s.lengthOfLongestSubstring(testcase) << endl;
+
+    return 0;
 }
 /*
  *        d     v     d     f
@@ -59,4 +105,3 @@ int main(){
  *
  *       start              i
  */
-
