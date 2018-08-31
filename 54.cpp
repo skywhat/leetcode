@@ -1,37 +1,64 @@
-#include<iostream>
-#include<vector>
+/*
+Given a matrix of m x n elements (m rows, n columns), return all elements of the
+matrix in spiral order.
+
+Example 1:
+
+Input:
+[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+Output: [1,2,3,6,9,8,7,4,5]
+Example 2:
+
+Input:
+[
+  [1, 2, 3, 4],
+  [5, 6, 7, 8],
+  [9,10,11,12]
+]
+Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+*/
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
+        int m = matrix.size();
+        if (!m) {
+            return {};
+        }
+        int n = matrix[0].size();
+        int left = 0, right = n - 1;
+        int top = 0, bottom = m - 1;
         vector<int> res;
-        if(matrix.size()==0)
-            return res;
-        int up=0,down=matrix.size()-1;
-        int left=0,right=matrix[0].size()-1;
-        while(left<=right&&up<=down){
-            for(int i=left;i<=right;++i){
-                res.push_back(matrix[up][i]);
+
+        while (left <= right && top <= bottom) {
+            for (int i = left; i <= right && top <= bottom; ++i) {
+                res.push_back(matrix[top][i]);
             }
-            up++;
-            for(int i=up;left<=right&&i<=down;++i){
+            top++;
+            for (int i = top; i <= bottom && left <= right; ++i) {
                 res.push_back(matrix[i][right]);
             }
             right--;
-            for(int i=right;up<=down&&i>=left;--i){
-                res.push_back(matrix[down][i]);
+            for (int i = right; i >= left && top <= bottom; --i) {
+                res.push_back(matrix[bottom][i]);
             }
-            down--;
-            for(int i=down;left<=right&&i>=up;--i){
+            bottom--;
+            for (int i = bottom; i >= top && left <= right; --i) {
                 res.push_back(matrix[i][left]);
             }
             left++;
         }
+
         return res;
     }
 };
 
-int main(){
-}
+int main() {}
