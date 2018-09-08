@@ -25,7 +25,7 @@ public:
                 head = head->next;
             }
         }
-        return preHead->next;
+        return prevHead.next;
     }
 };
 
