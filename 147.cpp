@@ -1,44 +1,43 @@
-#include<iostream>
 #include "ListNode.h"
+#include <iostream>
 
 using namespace std;
 
-class Solution{
+class Solution {
 public:
-	ListNode* insertionSortList(ListNode* head){
-		ListNode* preHead=new ListNode(-1);
-		preHead->next=head;
-		ListNode* prev=preHead;
-		ListNode* cur=head;
+    ListNode* insertionSortList(ListNode* head) {
+        ListNode prevHead(-1);
+        prevHead.next = head;
+        ListNode* prev = &prevHead;
 
-		while(cur){
-			if(cur->next&&cur->val>cur->next->val){
-				while(prev->next->val<cur->next->val){
-					prev=prev->next;
-				}
-				ListNode* temp=prev->next;
-				prev->next=cur->next;
-				cur->next=cur->next->next;
-				prev->next->next=temp;
+        while (head) {
+            if (head->next && head->val > head->next->val) {
+                while (prev->next->val < head->next->val) {
+                    prev = prev->next;
+                }
+                ListNode* temp = prev->next;
+                prev->next = head->next;
+                head->next = head->next->next;
+                prev->next->next = temp;
 
-				prev=preHead;
-			}else
-				cur=cur->next;
-
-		}
-		return preHead->next;
-	}
+                prev = &prevHead;
+            } else {
+                head = head->next;
+            }
+        }
+        return preHead->next;
+    }
 };
 
-int main(){
-	ListNodeEnv l;	
-	vector<int> test={1,5,4,2,3,6,9,7,8};
-	ListNode* head=l.initialize(test);
-	
-	Solution s;
+int main() {
+    ListNodeEnv l;
+    vector<int> test = {1, 5, 4, 2, 3, 6, 9, 7, 8};
+    ListNode* head = l.initialize(test);
 
-	ListNode* new_head=s.insertionSortList(head);
-	l.showList(new_head);
+    Solution s;
 
-	return 0;
+    ListNode* new_head = s.insertionSortList(head);
+    l.showList(new_head);
+
+    return 0;
 }
