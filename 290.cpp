@@ -45,3 +45,34 @@ public:
         return i == pattern.size();
     }
 };
+
+class Solution2 {
+public:
+    bool wordPattern(string pattern, string str) {
+        istringstream in(str);
+        unordered_map<char, string> m;
+        unordered_set<string> str_set;
+
+        string s;
+        int i = 0;
+        while (in >> s) {
+            if (m.count(pattern[i])) {
+                if (m[pattern[i]] != s) {
+                    return false;
+                }
+                i++;
+                continue;
+            }
+
+            if (str_set.count(s)) {
+                return false;
+            }
+
+            m[pattern[i]] = s;
+            str_set.insert(s);
+            i++;
+        }
+
+        return i == pattern.size();
+    }
+};
