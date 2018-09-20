@@ -27,6 +27,20 @@ public:
     }
 };
 
+/*
+dungeon
+-2 -3  3
+-5 -10 1
+10 30  -5
+
+dp
+7 5  2 M
+6 11 5 M
+1 1  6 1
+M M  1 M
+
+*/
+
 int main() {
     vector<vector<int>> v = {{-2, -3, 3}, {-5, -10, 1}, {10, 30, -5}};
     vector<vector<int>> v1 = {{0, -3}};
