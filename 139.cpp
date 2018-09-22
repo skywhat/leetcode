@@ -33,15 +33,16 @@ using namespace std;
 class Solution {
 public:
     bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_set<string> words(wordDict.begin(), wordDict.end());
+        unordered_set<string> dict(wordDict.begin(), wordDict.end());
         int n = s.size();
-        vector<int> dp(n + 1, 0);
-        dp[0] = 1;
+        vector<bool> dp(n + 1, false);
+        dp[0] = true;
+
         for (int i = 1; i <= n; ++i) {
             for (int j = i - 1; j >= 0; --j) {
                 if (dp[j]) {
-                    if (words.count(s.substr(j, i - j))) {
-                        dp[i] = 1;
+                    if (dict.count(s.substr(j, i - j))) {
+                        dp[i] = true;
                         break;
                     }
                 }
