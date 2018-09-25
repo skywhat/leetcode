@@ -36,3 +36,26 @@ public:
         }
     }
 };
+
+class Solution2 {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> res;
+        generate(res, "", 0, 0, n);
+        return res;
+    }
+
+    void generate(vector<string>& res, string s, int left, int right, int n) {
+        if (left > n || left < right) {
+            return;
+        }
+
+        if (right == n) {
+            res.push_back(s);
+            return;
+        }
+
+        generate(res, s + "(", left + 1, right, n);
+        generate(res, s + ")", left, right + 1, n);
+    }
+};
