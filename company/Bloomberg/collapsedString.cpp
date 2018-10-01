@@ -57,6 +57,7 @@ int main() {
         "aabbba",
         "aabbaccc",
         "aabcddeeeddcccc",
+        "aabcddeeeddccccd",
         "aaaaaaabbbbbbbcccccccccddddd",
         "aabbccddeeeddccbbbbbaa",
     };
