@@ -91,3 +91,41 @@ public:
         return res;
     }
 };
+
+class Solution3 {
+public:
+    string frequencySort(string s) {
+        vector<int> fre(128, 0);
+        for (auto c : s) {
+            fre[c]++;
+        }
+
+        sort(s.begin(), s.end(), [&](char l, char r) {
+            return fre[l] > fre[r] || (fre[l] == fre[r] && l < r);
+        });
+
+        return s;
+    }
+};
+
+class Solution4 {
+public:
+    string frequencySort(string s) {
+        unordered_map<char, int> fre;
+        for (auto c : s) {
+            fre[c]++;
+        }
+
+        vector<string> bucket(s.size() + 1, "");
+        for (auto item : fre) {
+            bucket[item.second] += string(item.second, item.first);
+        }
+
+        string res;
+        for (int i = s.size(); i >= 0; --i) {
+            res += bucket[i];
+        }
+
+        return res;
+    }
+};
