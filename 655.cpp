@@ -39,13 +39,12 @@ public:
                 if (node) {
                     nodes.push(node->left);
                     nodes.push(node->right);
+                    res[depth][pos] = to_string(node->val);
                 } else {
                     nodes.push(nullptr);
                     nodes.push(nullptr);
                 }
-                if (node) {
-                    res[depth][pos] = to_string(node->val);
-                }
+
                 pos += 2 * gap + 2;
             }
 
@@ -66,7 +65,15 @@ public:
 
 int main() {
     TreeEnv t;
-    vector<int> list = {1,2,5,3,NULL_TREENODE,NULL_TREENODE,NULL_TREENODE,4,NULL_TREENODE};
+    vector<int> list = {1,
+                        2,
+                        5,
+                        3,
+                        NULL_TREENODE,
+                        NULL_TREENODE,
+                        NULL_TREENODE,
+                        4,
+                        NULL_TREENODE};
     vector<int> list1
         = {3,  NULL_TREENODE, 30, 10, NULL_TREENODE, NULL_TREENODE,
            15, NULL_TREENODE, 45};
