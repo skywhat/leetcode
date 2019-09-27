@@ -53,3 +53,41 @@ public:
         return res;
     }
 };
+
+class Solution2 {
+public:
+    string fractionToDecimal(int numerator, int denominator) {
+        if (numerator == 0) {
+            return "0";
+        }
+
+        string res;
+        if (numerator < 0 ^ denominator < 0) {
+            res += "-";
+        }
+        long n = abs(long(numerator));
+        long d = abs(long(denominator));
+
+        res += to_string(n / d);
+        if (n % d == 0) {
+            return res;
+        }
+
+        res += ".";
+        unordered_map<int, int> m;
+        n %= d;
+        while (n) {
+            if (m.count(n)) {
+                res.insert(m[n], 1, '(');
+                res += ")";
+                break;
+            }
+            m[n] = res.size();
+            n *= 10;
+            res += to_string(n / d);
+            n %= d;
+        }
+
+        return res;
+    }
+};

@@ -52,3 +52,38 @@ public:
         return prevHead.next;
     }
 };
+
+/**
+ * Definition for singly-linked list with a random pointer.
+ * struct RandomListNode {
+ *     int label;
+ *     RandomListNode *next, *random;
+ *     RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
+ * };
+ */
+class Solution2 {
+public:
+    typedef RandomListNode rln;
+    RandomListNode* copyRandomList(RandomListNode* head) {
+        unordered_map<rln*, rln*> m;
+
+        rln* old_head = head;
+        while (old_head) {
+            m[old_head] = new RandomListNode(old_head->label);
+            old_head = old_head->next;
+        }
+
+        old_head = head;
+        while (old_head) {
+            if (old_head->next) {
+                m[old_head]->next = m[old_head->next];
+            }
+            if (old_head->random) {
+                m[old_head]->random = m[old_head->random];
+            }
+            old_head = old_head->next;
+        }
+
+        return m[head];
+    }
+};

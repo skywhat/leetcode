@@ -69,4 +69,23 @@ public:
     }
 };
 
+class Solution2 {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        int val = INT_MAX;
+        inorder(root, k, val);
+        return val == INT_MAX ? -1 : val;
+    }
+
+    void inorder(TreeNode* root, int& k, int& val) {
+        if (root) {
+            inorder(root->left, k, val);
+            if (--k == 0) {
+                val = root->val;
+            }
+            inorder(root->right, k, val);
+        }
+    }
+};
+
 int main() {}

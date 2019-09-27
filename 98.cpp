@@ -23,7 +23,6 @@
 // Explanation: The input is: [5,1,4,null,null,3,6]. The root node's value
 //              is 5 but its right child's value is 4.
 
-#include <iostream>
 #include <stack>
 #include <vector>
 
