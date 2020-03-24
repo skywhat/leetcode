@@ -15,6 +15,12 @@
 // Note:
 //
 // All given inputs are in lowercase letters a-z.
+#include<iostream>
+#include<vector>
+#include<string>
+
+using namespace std;
+
 
 class Solution {
 public:
@@ -27,6 +33,7 @@ public:
         for (int k = 0; k < strs[0].size(); ++k) {
             for (int i = 1; i < n; ++i) {
                 if (strs[i][k] != strs[0][k]) {
+					cout<<strs[i][k]<<endl;
                     return strs[0].substr(0, k);
                 }
             }
@@ -35,3 +42,12 @@ public:
         return strs[0];
     }
 };
+
+int main(){
+	Solution s;
+	vector<string> strs = {"hello", "he", "helloworld"};
+	string res = s.longestCommonPrefix(strs);
+	cout<<res<<endl;
+
+	return 0;
+}
