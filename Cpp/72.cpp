@@ -25,7 +25,7 @@
 // exention -> exection (replace 'n' with 'c')
 // exection -> execution (insert 'u')
 
-lass Solution {
+class Solution {
 public:
     int minDistance(string word1, string word2) {
         int m = word1.size();
