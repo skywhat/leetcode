@@ -33,3 +33,56 @@ class Solution(object):
             res.append(root.val)
             root = root.right
         return res
+
+#O(1) space
+#without modifying tree
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        cur = root
+        while cur:
+            if cur.left:
+                prev = cur.left
+                while prev.right and prev.right != cur:
+                    prev = prev.right
+                if prev.right == None:
+                    prev.right = cur
+                    cur = cur.left
+                else:
+                    prev.right = None
+                    res.append(cur.val)
+                    cur = cur.right
+            else:
+                res.append(cur.val)
+                cur = cur.right
+        return res
+
+#O(1) space
+#modifying tree
+class Solution(object):
+    def inorderTraversal(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[int]
+        """
+        res = []
+        cur = root
+        while cur:
+            if cur.left:
+                prev = cur.left
+                while prev.right and prev != cur:
+                    prev = prev.right
+                if prev.right == None:
+                    prev.right = cur
+                    cur = cur.left
+                    prev.right.left = None
+                else:
+                    cur = cur.right
+            else:
+                res.append(cur.val)
+                cur = cur.right
+        return res
