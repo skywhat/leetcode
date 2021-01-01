@@ -16,7 +16,7 @@ public:
         dp[0]=1;
         for(auto&& n:nums){
             for(int i=s1;i>=n;--i){
-                //for dp[i], if not pick n,dp[i], otherwise dp[i-n], thus dp[i]=dp[i]+dp[n-i]
+                //as for dp[i], if not pick n, it's dp[i], otherwise it's dp[i-n], thus dp[i]=dp[i]+dp[i-n]
                 dp[i]+=dp[i-n];
             }
         }
