@@ -1,4 +1,3 @@
-from collections import deque
 class Solution(object):
     def ladderLength(self, beginWord, endWord, wordList):
         """
@@ -7,30 +6,22 @@ class Solution(object):
         :type wordList: List[str]
         :rtype: int
         """
-        q = deque()
+        wordSet = set(wordList)
+        q = collections.deque()
         q.append(beginWord)
-        words = set(wordList)
-        dist = 1
-        while len(q) != 0:
-            n = len(q)
-            for i in range(n):
-                w = q.popleft()
-                if w == endWord:
-                    return dist
-                self.addNextWord(w, words, q)
-            dist +=1
-        return 0
-    
-    def addNextWord(self, begin, words, q):
-        for i in range(len(begin)):
-            x = begin[i]
-            for j in range(26):
-                ch = chr(ord('a')+j)
-                if ch == x:
-                    continue
-                begin = begin[:i] + ch + begin[i+1:]
-                if begin in words:
-                    q.append(begin)
-                    words.discard(begin)
-            begin = begin[:i] + x + begin[i+1:]
+        step = 0
+        while q:
+            size = len(q)
+            step +=1
+            for _ in range(size):
+                word = q.popleft()
+                if word == endWord:
+                    return step
+                for i in range(len(word)):
+                    for k in range(26):
+                        candidate = word[:i] + chr(ord('a')+k) + word[i+1:]
+                        if candidate in wordSet:
+                            q.append(candidate)
+                            wordSet.discard(candidate)
         
+        return 0
