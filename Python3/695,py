@@ -1,0 +1,18 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        m, n = len(grid), len(grid[0])
+        res = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    res = max(res, self.calculateArea(i, j, m, n, grid))
+        return res
+
+    def calculateArea(self, i, j, m, n, grid):
+        if i<0 or i>=m or j<0 or j>=n or grid[i][j] == 0:
+            return 0
+        grid[i][j] = 0
+        return 1+self.calculateArea(i+1, j, m, n, grid) + \
+        self.calculateArea(i-1, j, m, n, grid) + \
+        self.calculateArea(i, j+1, m, n, grid) + \
+        self.calculateArea(i, j-1, m, n, grid)
