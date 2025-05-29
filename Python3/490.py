@@ -13,10 +13,10 @@ class Solution:
         dir = [[-1, 0], [1,0], [0,1],[0,-1]]
         for d in dir:
             x, y = start[0], start[1]
-            while x>=0 and x<m and y>=0 and y<n and maze[x][y] == 0:
+            while 0<=x+d[0]<m and 0<=y+d[1]<n and maze[x+d[0]][y+d[1]] == 0:
                 x+=d[0]
                 y+=d[1]
-            if self.dfs(maze, [x-d[0], y-d[1]], destination, visited, m, n):
+            if self.dfs(maze, [x, y], destination, visited, m, n):
                 return True
         return False
 
