@@ -1,4 +1,5 @@
 # Define a class that implements the __lt__ method to customize the sorting order
+# if the string length is the same, sort by the alphabetical order
 import heapq
 
 class StringLength:
@@ -6,6 +7,8 @@ class StringLength:
         self.string = string
 
     def __lt__(self, other):
+        if len(self.string) == len(other.string):
+            return self.string < other.string
         return len(self.string) < len(other.string)
 
 
@@ -31,11 +34,11 @@ The output will be:
 fig
 date
 kiwi
+apple
 grape
 lemon
-apple
-cherry
 banana
+cherry
 honeydew
 elderberry
 """
