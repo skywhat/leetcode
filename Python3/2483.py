@@ -13,13 +13,13 @@ class Solution:
             preN[i] = totalN
         
         closeHour = 0
-        minPenality = n+1
+        minPenalty = n+1
         for i in range(n+1):
             if i>0:
-                penality = preN[i-1] + totalY - preY[i-1]
+                penalty = preN[i-1] + totalY - preY[i-1]
             else:
-                penality = totalY
-            if penality < minPenality:
-                minPenality = penality
+                penalty = totalY
+            if penalty < minPenalty:
+                minPenalty = penalty
                 closeHour = i
         return closeHour
