@@ -100,3 +100,23 @@ if __name__ == "__main__":
     OrderedDict([('e', (500, 23000)), ('d', (400, 22000))])
     
     """
+
+
+
+
+    """
+    ✅ Time Complexities
+    Operation	Time Complexity	Notes
+    move_to_end(key)	O(1)	Internally moves the key to front or end of a doubly linked list
+    popitem(last=False)	O(1)	Pops from head (if last=False) or tail (if last=True) directly
+    __setitem__ / __getitem__	O(1)	Insertion and lookup are constant time
+
+    🔧 Why O(1)?
+    OrderedDict is implemented using a doubly linked list + hash table, so:
+
+    The dict provides O(1) access to nodes.
+
+    The linked list allows O(1) movement and popping from either end.
+    
+    
+    """
