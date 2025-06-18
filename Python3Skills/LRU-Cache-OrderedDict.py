@@ -1,3 +1,6 @@
+# implement LRU cache using OrderedDict
+# LRU cache is a cache that evicts the least recently used item when the cache is full
+
 from collections import OrderedDict
 
 class LRUCache:
