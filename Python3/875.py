@@ -1,26 +1,27 @@
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
-        if len(piles) == h:
+        if h == len(piles):
             return max(piles)
-        l, r = 1, max(piles)
-
-        def hoursNeeded(k):
-            cnt = 0
-            for p in piles:
-                cnt += p//k
-                if p%k != 0:
-                    cnt +=1
-            return cnt
         
-        while l<r:
-            mid = (l+r)//2
-            needed = hoursNeeded(mid)
-            # print("needed", needed, "mid", mid)
-            # even needed == h, we want to try smaller one.
-            if needed <= h:
-                r = mid
+        def hourNeeded(piles, k):
+            hour = 0
+            for p in piles:
+                hour += p//k
+                if p%k !=0:
+                    hour +=1
+            return hour
+        
+        i, j = 1, max(piles)
+        while i+1 < j:
+            mid = (i+j)//2
+            hour = hourNeeded(piles, mid)
+            if hour <= h:
+                j = mid
             else:
-                l = mid+1
-        return l
-
-
+                i = mid
+        # i+1==j or i==j
+        hour = hourNeeded(piles, i)
+        if hour <= h:
+            return i
+        return j
+        
